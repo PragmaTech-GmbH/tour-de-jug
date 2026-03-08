@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin — Pending Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+<nav class="bg-indigo-700 text-white px-6 py-4">
+    <a href="/" class="text-xl font-bold">Tour de JUG ☕</a>
+</nav>
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-2">Pending Events</h1>
+    <p class="text-gray-500 mb-6" th:text="'JUG: ' + ${jug.name}">JUG Name</p>
+
+    <div th:if="${#lists.isEmpty(events)}" class="bg-white rounded-lg shadow-sm p-6 text-gray-400">
+        No pending events.
+    </div>
+
+    <div th:each="event : ${events}" class="bg-white rounded-lg shadow-sm p-4 mb-4">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="font-medium" th:text="${event.talkTitle}">Talk Title</p>
+                <p class="text-sm text-gray-500 mt-1">
+                    <span th:text="${#strings.substring(event.eventTime.toString(), 0, 10)}">Date</span>
+                    &nbsp;·&nbsp;
+                    <a th:href="@{/profiles/{u}(u=${event.speaker.username})}" class="text-indigo-600 hover:underline"
+                       th:text="'@' + ${event.speaker.username}">Speaker</a>
+                </p>
+                <div class="flex gap-3 mt-1">
+                    <a th:if="${event.slidesUrl}" th:href="${event.slidesUrl}" target="_blank" class="text-xs text-blue-600">Slides</a>
+                    <a th:if="${event.recordingUrl}" th:href="${event.recordingUrl}" target="_blank" class="text-xs text-blue-600">Recording</a>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <form th:action="@{/admin/jugs/{s}/events/{id}/approve(s=${jug.slug},id=${event.id})}" method="post">
+                    <button type="submit" class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700">Approve</button>
+                </form>
+                <form th:action="@{/admin/jugs/{s}/events/{id}/reject(s=${jug.slug},id=${event.id})}" method="post">
+                    <button type="submit" class="bg-red-600 text-white text-sm px-3 py-1 rounded hover:bg-red-700">Reject</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

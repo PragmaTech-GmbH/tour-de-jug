@@ -1,0 +1,81 @@
+jugs:
+  - slug: londonjavacommunity
+    name: London Java Community
+    city: London
+    country: UK
+    homepage_url: https://www.londonjavacommunity.co.uk
+    latitude: 51.5074
+    longitude: -0.1278
+    established_year: 2009
+  - slug: jug-hamburg
+    name: JUG Hamburg
+    city: Hamburg
+    country: Germany
+    homepage_url: https://www.jug-hamburg.de
+    latitude: 53.5753
+    longitude: 10.0153
+    established_year: 2001
+  - slug: jug-ch
+    name: JUG Switzerland
+    city: Zurich
+    country: Switzerland
+    homepage_url: https://www.jug.ch
+    latitude: 47.3769
+    longitude: 8.5417
+    established_year: 2000
+  - slug: nljug
+    name: NLJUG (Dutch Java User Group)
+    city: Amsterdam
+    country: Netherlands
+    homepage_url: https://nljug.org
+    latitude: 52.3676
+    longitude: 4.9041
+    established_year: 1998
+  - slug: jfokus
+    name: Stockholm JUG
+    city: Stockholm
+    country: Sweden
+    homepage_url: https://www.stockholmjug.se
+    latitude: 59.3293
+    longitude: 18.0686
+    established_year: 2007
+  - slug: paris-jug
+    name: Paris JUG
+    city: Paris
+    country: France
+    homepage_url: https://www.parisjug.org
+    latitude: 48.8566
+    longitude: 2.3522
+    established_year: 2009
+  - slug: madrid-jug
+    name: Madrid JUG
+    city: Madrid
+    country: Spain
+    homepage_url: https://madridjug.es
+    latitude: 40.4168
+    longitude: -3.7038
+    established_year: 2009
+  - slug: jug-bb
+    name: JUG Berlin-Brandenburg
+    city: Berlin
+    country: Germany
+    homepage_url: https://www.jug-bb.de
+    latitude: 52.5200
+    longitude: 13.4050
+    established_year: 2001
+  - slug: czjug
+    name: Czech JUG
+    city: Prague
+    country: Czech Republic
+    homepage_url: https://www.czjug.cz
+    latitude: 50.0755
+    longitude: 14.4378
+    established_year: 2007
+  - slug: sfjug
+    name: San Francisco JUG
+    city: San Francisco
+    country: USA
+    homepage_url: https://www.sfjava.org
+    latitude: 37.7749
+    longitude: -122.4194
+    established_year: 2000

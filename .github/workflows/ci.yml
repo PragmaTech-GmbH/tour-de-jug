@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      # Selenide downloads ChromeDriver automatically via WebDriverManager,
+      # but Chrome itself must be pre-installed.  ubuntu-latest ships with
+      # Google Chrome; this step pins a specific recent version and exposes
+      # the binary path so WebDriverManager can find it reliably.
+      - name: Set up Chrome for Selenide E2E tests
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+        id: setup-chrome
+
+      - name: Verify Chrome installation
+        run: google-chrome --version
+
+      # Docker is pre-installed on ubuntu-latest and is required for
+      # Testcontainers (PostgreSQL) and for WireMock (in-process, no Docker needed).
+      - name: Run unit + integration + E2E tests
+        run: ./mvnw verify -B
+        env:
+          # WireMock replaces the real GitHub endpoints, so these values are
+          # never sent to github.com — any non-empty string works here.
+          GITHUB_CLIENT_ID: ci-placeholder
+          GITHUB_CLIENT_SECRET: ci-placeholder
+          # Tell ChromeDriver where Chrome lives (set by setup-chrome action).
+          CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
+          # Selenide headless flag — also set in BaseE2EIT, but belt-and-suspenders.
+          SELENIDE_HEADLESS: "true"
+
+      - name: Upload Surefire / Failsafe test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            target/surefire-reports/
+            target/failsafe-reports/
+          retention-days: 7
+
+      # Selenide saves a screenshot and page source next to each failed test.
+      # The default output folder is build/reports/tests (Gradle) or the
+      # working directory for Maven.  We capture everything under build/.
+      - name: Upload Selenide failure screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenide-screenshots
+          path: |
+            build/reports/
+            target/selenide-screenshots/
+          retention-days: 3

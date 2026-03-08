@@ -1,0 +1,121 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # allows manual trigger from the GitHub UI
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}   # e.g. rieckpil/tour-de-jug
+
+jobs:
+  # ── 1. Build & push Docker image to GHCR ──────────────────────────────────
+  build-image:
+    name: Build & Push Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+      image-digest: ${{ steps.push.outputs.digest }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix=sha-,format=short
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ── 2. Deploy to Hetzner VPS via SSH ──────────────────────────────────────
+  deploy:
+    name: Deploy to Hetzner VPS
+    runs-on: ubuntu-latest
+    needs: build-image
+    environment: production          # optional: requires manual approval gate in GitHub
+
+    steps:
+      - name: Checkout (for docker-compose.prod.yml)
+        uses: actions/checkout@v4
+
+      - name: Copy compose file and nginx config to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "docker-compose.prod.yml,deploy/nginx/nginx.conf"
+          target: "/opt/tour-de-jug"
+          strip_components: 1   # flattens deploy/nginx/ → nginx/ under /opt/tour-de-jug
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -e
+            cd /opt/tour-de-jug
+
+            # Pull the new image
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io \
+              -u ${{ github.actor }} --password-stdin
+
+            export IMAGE_TAG=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+            # Perform a rolling restart (zero downtime with two replicas)
+            # or a simple recreate for a single-replica setup
+            docker compose -f docker-compose.prod.yml pull app
+            docker compose -f docker-compose.prod.yml up -d --no-deps app
+
+            # Clean up dangling images to save disk space
+            docker image prune -f
+
+      - name: Health check
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # Wait up to 60 s for the app to become healthy
+            for i in $(seq 1 12); do
+              STATUS=$(curl -sf http://localhost:8080/actuator/health | python3 -c "import sys,json; print(json.load(sys.stdin)['status'])" 2>/dev/null || echo "DOWN")
+              if [ "$STATUS" = "UP" ]; then
+                echo "Health check passed."
+                exit 0
+              fi
+              echo "Waiting... ($i/12)"
+              sleep 5
+            done
+            echo "Health check failed after 60 s." && exit 1

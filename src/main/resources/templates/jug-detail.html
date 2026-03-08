@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${jug.name} + ' — Tour de JUG'">JUG Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="bg-gray-50">
+<nav class="bg-indigo-700 text-white px-6 py-4 flex items-center justify-between">
+    <a href="/" class="text-xl font-bold">Tour de JUG ☕</a>
+</nav>
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <a href="/" class="text-indigo-600 hover:underline text-sm mb-4 inline-block">← Back to Map</a>
+    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <h1 class="text-2xl font-bold text-gray-900" th:text="${jug.name}">JUG Name</h1>
+        <p class="text-gray-500 mt-1" th:text="${jug.city} + ', ' + ${jug.country}">City, Country</p>
+
+        <div th:if="${jug.description}" class="mt-4 text-gray-700" th:text="${jug.description}"></div>
+
+        <div class="flex flex-wrap gap-3 mt-4">
+            <a th:if="${jug.homepageUrl}" th:href="${jug.homepageUrl}" target="_blank"
+               class="text-sm bg-indigo-100 text-indigo-700 px-3 py-1 rounded hover:bg-indigo-200">Website</a>
+            <a th:if="${jug.meetupUrl}" th:href="${jug.meetupUrl}" target="_blank"
+               class="text-sm bg-orange-100 text-orange-700 px-3 py-1 rounded hover:bg-orange-200">Meetup</a>
+            <a th:if="${jug.socialUrl}" th:href="${jug.socialUrl}" target="_blank"
+               class="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200">Social</a>
+        </div>
+
+        <p th:if="${jug.establishedYear}" class="text-sm text-gray-500 mt-3">
+            Established <span th:text="${jug.establishedYear}">2009</span>
+        </p>
+    </div>
+
+    <div th:if="${jug.latitude != null and jug.longitude != null}" id="jugMap" class="rounded-lg overflow-hidden shadow-sm mb-6" style="height:300px;"></div>
+</div>
+<footer class="bg-gray-800 text-gray-300 text-sm py-3 text-center mt-8">
+    © 2026 PragmaTech | <a href="#" class="hover:text-white">Imprint</a>
+</footer>
+<script th:if="${jug.latitude != null and jug.longitude != null}" th:inline="javascript">
+    var lat = /*[[${jug.latitude}]]*/ 0;
+    var lng = /*[[${jug.longitude}]]*/ 0;
+    var name = /*[[${jug.name}]]*/ '';
+    var jugMap = L.map('jugMap').setView([lat, lng], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(jugMap);
+    L.marker([lat, lng]).addTo(jugMap).bindPopup(name).openPopup();
+</script>
+</body>
+</html>
