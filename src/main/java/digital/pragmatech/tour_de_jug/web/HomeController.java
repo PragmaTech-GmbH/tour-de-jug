@@ -1,12 +1,11 @@
 package digital.pragmatech.tour_de_jug.web;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import digital.pragmatech.tour_de_jug.domain.JavaUserGroup;
 import digital.pragmatech.tour_de_jug.repository.JavaUserGroupRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -16,15 +15,15 @@ import java.util.stream.Collectors;
 public class HomeController {
 
     private final JavaUserGroupRepository jugRepository;
-    private final ObjectMapper objectMapper;
+    private final JsonMapper jsonMapper;
 
-    public HomeController(JavaUserGroupRepository jugRepository, ObjectMapper objectMapper) {
+    public HomeController(JavaUserGroupRepository jugRepository, JsonMapper jsonMapper) {
         this.jugRepository = jugRepository;
-        this.objectMapper = objectMapper;
+        this.jsonMapper = jsonMapper;
     }
 
     @GetMapping("/")
-    public String home(Model model) throws JsonProcessingException {
+    public String home(Model model) {
         List<JavaUserGroup> activeJugs = jugRepository.findAllActive();
         List<Map<String, Object>> jugData = activeJugs.stream()
                 .filter(jug -> jug.getLatitude() != null && jug.getLongitude() != null)
@@ -40,7 +39,7 @@ public class HomeController {
                 .collect(Collectors.toList());
 
         model.addAttribute("jugs", activeJugs);
-        model.addAttribute("jugsJson", objectMapper.writeValueAsString(jugData));
+        model.addAttribute("jugsJson", jsonMapper.writeValueAsString(jugData));
         return "index";
     }
 }

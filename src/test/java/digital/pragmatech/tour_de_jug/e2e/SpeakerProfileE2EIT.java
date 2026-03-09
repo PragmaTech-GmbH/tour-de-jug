@@ -80,13 +80,18 @@ class SpeakerProfileE2EIT extends BaseE2EIT {
     }
 
     @Test
-    @DisplayName("unauthenticated visit to /speaking-events/new redirects to login")
+    @DisplayName("unauthenticated visit to /speaking-events/new does not show the form")
     void unauthenticatedNewTalkRedirectsToLogin() {
+        // Remove all WireMock stubs so the GitHub OAuth flow cannot complete.
+        // Spring Security still redirects the browser to the WireMock authorization
+        // URL, but WireMock returns a 404 (no matching stub), so the callback with
+        // the auth-code never reaches the app and the user stays unauthenticated.
+        GITHUB_MOCK.resetAll();
+
         open("/speaking-events/new");
 
-        // Spring Security redirects anonymous users to the OAuth2 login page.
-        // The default redirect lands on /login or triggers the GitHub redirect.
-        // Either way the user does NOT see the form.
+        // The talk form must not be accessible — the browser is stuck on
+        // WireMock's 404 page, not on the Spring app's form page.
         $("input[name='talkTitle']").shouldNotBe(visible);
     }
 

@@ -89,8 +89,13 @@ class EntryPageE2EIT extends BaseE2EIT {
         $("#searchInput").setValue("London");
         $$("#jugList .jug-item").shouldHave(CollectionCondition.sizeLessThan(totalCount));
 
-        // Clear the search input — all JUGs should reappear
-        $("#searchInput").setValue("");
+        // Clear the search input via JS — setValue("") alone does not fire the
+        // 'input' event that the sidebar's filter function listens on.
+        executeJavaScript(
+            "var el = document.getElementById('searchInput');" +
+            "el.value = '';" +
+            "el.dispatchEvent(new Event('input'));"
+        );
         $$("#jugList .jug-item").shouldHave(CollectionCondition.size(totalCount));
     }
 
