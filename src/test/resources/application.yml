@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: test
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID:test-placeholder}
+            client-secret: ${GITHUB_CLIENT_SECRET:test-placeholder}

@@ -7,3 +7,14 @@ services:
       - 'POSTGRES_USER=tourdegjug'
     ports:
       - '5432'
+
+  keycloak:
+    image: 'quay.io/keycloak/keycloak:26.2'
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - '9090:8080'
+    volumes:
+      - ./src/main/resources/keycloak/tour-de-jug-realm.json:/opt/keycloak/data/import/tour-de-jug-realm.json:ro

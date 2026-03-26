@@ -1,0 +1,114 @@
+{
+  "realm": "tour-de-jug",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "clients": [
+    {
+      "clientId": "tour-de-jug-app",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "dev-secret",
+      "redirectUris": ["http://localhost:8080/*"],
+      "webOrigins": ["http://localhost:8080"],
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "protocol": "openid-connect",
+      "protocolMappers": [
+        {
+          "name": "github-id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "config": {
+            "user.attribute": "github_id",
+            "claim.name": "id",
+            "jsonType.label": "long",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "github-login",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "config": {
+            "user.attribute": "username",
+            "claim.name": "login",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "github-avatar-url",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "config": {
+            "user.attribute": "avatar_url",
+            "claim.name": "avatar_url",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "github-name",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "config": {
+            "user.attribute": "display_name",
+            "claim.name": "name",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "rieckpil",
+      "enabled": true,
+      "email": "philip@pragmatech.digital",
+      "firstName": "Philip",
+      "lastName": "Riecks",
+      "attributes": {
+        "github_id": ["200001"],
+        "avatar_url": ["https://i.pravatar.cc/150?u=rieckpil"],
+        "display_name": ["Philip Riecks"]
+      },
+      "credentials": [{ "type": "password", "value": "password", "temporary": false }]
+    },
+    {
+      "username": "duke",
+      "enabled": true,
+      "email": "duke@java.dev",
+      "firstName": "Duke",
+      "lastName": "Java",
+      "attributes": {
+        "github_id": ["200002"],
+        "avatar_url": ["https://i.pravatar.cc/150?u=duke"],
+        "display_name": ["Duke Java"]
+      },
+      "credentials": [{ "type": "password", "value": "password", "temporary": false }]
+    },
+    {
+      "username": "janedoe",
+      "enabled": true,
+      "email": "jane@example.com",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "attributes": {
+        "github_id": ["200003"],
+        "avatar_url": ["https://i.pravatar.cc/150?u=janedoe"],
+        "display_name": ["Jane Doe"]
+      },
+      "credentials": [{ "type": "password", "value": "password", "temporary": false }]
+    }
+  ]
+}

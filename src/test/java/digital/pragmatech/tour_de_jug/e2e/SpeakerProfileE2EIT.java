@@ -64,7 +64,7 @@ class SpeakerProfileE2EIT extends BaseE2EIT {
         $("img[src*='" + GitHubMockServer.FAKE_GITHUB_ID + "']").shouldBe(visible);
 
         // Three stat boxes: total talks, this year, speaking since
-        $(".grid .text-3xl").shouldBe(visible);
+        $(".grid .text-2xl").shouldBe(visible);
     }
 
     @Test
@@ -123,8 +123,8 @@ class SpeakerProfileE2EIT extends BaseE2EIT {
         $("h1").shouldHave(text(GitHubMockServer.FAKE_DISPLAY_NAME));
 
         // The talk title and status badge must appear in the talk list.
-        $$(".border-b").findBy(text("Spring Boot 4 Deep Dive")).shouldBe(visible);
-        $$(".border-b").findBy(text("PENDING")).shouldBe(visible);
+        $$(".talk-item").findBy(text("Spring Boot 4 Deep Dive")).shouldBe(visible);
+        $$(".talk-item").findBy(text("PENDING")).shouldBe(visible);
     }
 
     @Test

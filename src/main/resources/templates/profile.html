@@ -2,92 +2,203 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" th:content="'Speaker profile for ' + ${profileUser.displayName ?: profileUser.username} + ' on Tour de JUG'">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:title" th:content="${profileUser.displayName ?: profileUser.username} + ' — Tour de JUG'">
+    <meta property="og:description" th:content="'Speaker profile for ' + ${profileUser.displayName ?: profileUser.username} + ' on Tour de JUG'">
+    <meta property="og:image" th:content="${profileUser.avatarUrl ?: '/images/og-image.svg'}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" th:content="${profileUser.displayName ?: profileUser.username} + ' — Tour de JUG'">
+    <meta name="twitter:description" th:content="'Speaker profile for ' + ${profileUser.displayName ?: profileUser.username} + ' on Tour de JUG'">
+    <meta name="twitter:image" th:content="${profileUser.avatarUrl ?: '/images/og-image.svg'}">
+
     <title th:text="${profileUser.displayName ?: profileUser.username} + ' — Tour de JUG'">Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#fff7ed', 100: '#ffedd5', 200: '#fed7aa', 500: '#f97316', 600: '#ea580c', 700: '#c2410c', 800: '#9a3412' }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { height: 100%; }
+        body { height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+        .main-split { flex: 1; display: flex; min-height: 0; }
+        #tourMap { width: 100%; height: 100%; }
+        .profile-scroll::-webkit-scrollbar { width: 4px; }
+        .profile-scroll::-webkit-scrollbar-track { background: transparent; }
+        .profile-scroll::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 2px; }
+        .leaflet-popup-content-wrapper { border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .leaflet-popup-content { margin: 12px 16px; line-height: 1.5; }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="font-sans antialiased">
 
-<nav class="bg-indigo-700 text-white px-6 py-4 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold">Tour de JUG ☕</a>
-    <div class="text-sm" sec:authorize="isAuthenticated()">
-        Hello, <a th:href="@{/profiles/{u}(u=${#authentication.name})}" class="underline" sec:authentication="name">User</a>
-        &nbsp;|&nbsp;<a href="/logout" class="hover:text-indigo-200">Logout</a>
+<!-- Navbar -->
+<nav class="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shrink-0">
+    <a href="/" class="flex items-center gap-2 text-lg font-bold text-gray-900 tracking-tight">
+        <span class="text-2xl">&#9749;</span>
+        <span>Tour de JUG</span>
+    </a>
+    <div class="text-sm flex items-center gap-3" sec:authorize="isAuthenticated()">
+        <a th:href="@{/profiles/{u}(u=${#authentication.name})}"
+           class="text-gray-700 hover:text-brand-600 font-medium transition-colors" sec:authentication="name">User</a>
+        <a href="/logout" class="text-gray-400 hover:text-gray-600 transition-colors">Logout</a>
     </div>
 </nav>
 
-<div class="max-w-4xl mx-auto px-4 py-8">
-    <!-- Profile header -->
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-6 flex items-center gap-6">
-        <img th:if="${profileUser.avatarUrl}" th:src="${profileUser.avatarUrl}" alt="Avatar"
-             class="w-24 h-24 rounded-full border-2 border-indigo-200"/>
-        <div class="flex-1">
-            <h1 class="text-2xl font-bold text-gray-900" th:text="${profileUser.displayName ?: profileUser.username}">Name</h1>
-            <p class="text-gray-500 mt-1">
-                GitHub: <a th:href="'https://github.com/' + ${profileUser.username}" class="text-indigo-600 hover:underline"
-                           th:text="'@' + ${profileUser.username}" target="_blank">@username</a>
-            </p>
-            <p th:if="${isOwnProfile}" class="mt-2">
-                <a th:href="@{/profiles/{u}/edit(u=${profileUser.username})}"
-                   class="text-sm bg-indigo-100 text-indigo-700 px-3 py-1 rounded hover:bg-indigo-200">Edit Profile</a>
-                <a href="/speaking-events/new"
-                   class="text-sm bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200 ml-2">Add Talk</a>
-            </p>
-        </div>
-    </div>
+<!-- 50/50 split -->
+<div class="main-split">
+    <!-- Left: Profile content -->
+    <div class="w-1/2 overflow-y-auto profile-scroll bg-gray-50 border-r border-gray-200">
+        <div class="max-w-xl mx-auto px-6 py-8">
 
-    <!-- Stats -->
-    <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <div class="text-3xl font-bold text-indigo-600" th:text="${totalTalks}">0</div>
-            <div class="text-sm text-gray-500 mt-1">Talks Total</div>
-        </div>
-        <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <div class="text-3xl font-bold text-indigo-600" th:text="${talksThisYear}">0</div>
-            <div class="text-sm text-gray-500 mt-1">This Year</div>
-        </div>
-        <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <div class="text-3xl font-bold text-indigo-600" th:text="${speakingSince ?: '—'}">—</div>
-            <div class="text-sm text-gray-500 mt-1">Speaking Since</div>
-        </div>
-    </div>
+            <!-- Back link -->
+            <a href="/" class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-brand-600 mb-6 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                Back to Map
+            </a>
 
-    <!-- Talks list -->
-    <div class="bg-white rounded-lg shadow-sm p-6">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent &amp; Upcoming Talks</h2>
-        <div th:if="${#lists.isEmpty(talks)}" class="text-gray-400 text-sm">No talks yet.</div>
-        <div th:each="talk : ${talks}" class="border-b border-gray-100 py-3 last:border-0">
-            <div class="flex items-start justify-between gap-4">
-                <div class="flex-1">
-                    <p class="font-medium text-gray-900" th:text="${talk.talkTitle}">Talk Title</p>
-                    <p class="text-sm text-gray-500 mt-1">
-                        <span th:text="${#strings.substring(talk.eventTime.toString(), 0, 10)}">Date</span>
-                        &nbsp;·&nbsp;
-                        <a th:href="@{/jugs/{s}(s=${talk.jug.slug})}" class="text-indigo-600 hover:underline"
-                           th:text="${talk.jug.name}">JUG Name</a>
-                    </p>
-                    <div class="flex gap-2 mt-1">
-                        <a th:if="${talk.slidesUrl}" th:href="${talk.slidesUrl}" target="_blank"
-                           class="text-xs text-blue-600 hover:underline">Slides</a>
-                        <a th:if="${talk.recordingUrl}" th:href="${talk.recordingUrl}" target="_blank"
-                           class="text-xs text-blue-600 hover:underline">Recording</a>
+            <!-- Profile header -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-5">
+                <div class="flex items-center gap-5">
+                    <img th:if="${profileUser.avatarUrl}" th:src="${profileUser.avatarUrl}" alt="Avatar"
+                         class="w-16 h-16 rounded-full ring-4 ring-orange-100"/>
+                    <div class="flex-1 min-w-0">
+                        <h1 class="text-xl font-bold text-gray-900 truncate" th:text="${profileUser.displayName ?: profileUser.username}">Name</h1>
+                        <p class="text-gray-400 mt-0.5 text-sm">
+                            <a th:href="'https://github.com/' + ${profileUser.username}" class="hover:text-brand-600 transition-colors"
+                               th:text="'@' + ${profileUser.username}" target="_blank">@username</a>
+                        </p>
+                        <div th:if="${isOwnProfile}" class="flex gap-2 mt-2.5">
+                            <a th:href="@{/profiles/{u}/edit(u=${profileUser.username})}"
+                               class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-200 font-medium transition-colors">Edit Profile</a>
+                            <a href="/speaking-events/new"
+                               class="text-xs bg-brand-600 text-white px-3 py-1.5 rounded-lg hover:bg-brand-700 font-medium transition-colors">Add Talk</a>
+                        </div>
                     </div>
                 </div>
-                <span class="text-xs px-2 py-1 rounded-full font-medium"
-                      th:classappend="${talk.status.name() == 'APPROVED'} ? 'bg-green-100 text-green-700' : (${talk.status.name() == 'REJECTED'} ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700')"
-                      th:text="${talk.status}">PENDING</span>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-3 mb-5">
+                <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+                    <div class="text-2xl font-bold text-brand-600" th:text="${totalTalks}">0</div>
+                    <div class="text-[10px] text-gray-400 mt-1 font-medium uppercase tracking-wider">Talks Total</div>
+                </div>
+                <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+                    <div class="text-2xl font-bold text-brand-600" th:text="${talksThisYear}">0</div>
+                    <div class="text-[10px] text-gray-400 mt-1 font-medium uppercase tracking-wider">This Year</div>
+                </div>
+                <div class="bg-white rounded-xl border border-gray-200 p-4 text-center">
+                    <div class="text-2xl font-bold text-brand-600" th:text="${speakingSince ?: '—'}">—</div>
+                    <div class="text-[10px] text-gray-400 mt-1 font-medium uppercase tracking-wider">Speaking Since</div>
+                </div>
+            </div>
+
+            <!-- Talks list -->
+            <div class="bg-white rounded-xl border border-gray-200 p-5">
+                <h2 class="text-sm font-semibold text-gray-900 mb-3">Recent &amp; Upcoming Talks</h2>
+                <div th:if="${#lists.isEmpty(talks)}" class="text-gray-400 text-sm py-4 text-center">No talks yet.</div>
+                <div th:each="talk, iter : ${talks}"
+                     th:classappend="${!iter.last} ? 'border-b border-gray-100' : ''"
+                     class="talk-item py-3">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-gray-900 text-sm leading-snug" th:text="${talk.talkTitle}">Talk Title</p>
+                            <p class="text-xs text-gray-400 mt-1">
+                                <span th:text="${#strings.substring(talk.eventTime.toString(), 0, 10)}">Date</span>
+                                <span class="mx-1">&middot;</span>
+                                <a th:href="@{/jugs/{s}(s=${talk.jug.slug})}" class="text-brand-600 hover:text-brand-700"
+                                   th:text="${talk.jug.name}">JUG Name</a>
+                            </p>
+                            <div class="flex gap-3 mt-1">
+                                <a th:if="${talk.slidesUrl}" th:href="${talk.slidesUrl}" target="_blank"
+                                   class="text-xs text-brand-600 hover:text-brand-700 font-medium">Slides &rarr;</a>
+                                <a th:if="${talk.recordingUrl}" th:href="${talk.recordingUrl}" target="_blank"
+                                   class="text-xs text-brand-600 hover:text-brand-700 font-medium">Recording &rarr;</a>
+                            </div>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full font-medium shrink-0"
+                              th:classappend="${talk.status.name() == 'APPROVED'} ? 'bg-emerald-50 text-emerald-700' : (${talk.status.name() == 'REJECTED'} ? 'bg-red-50 text-red-600' : 'bg-amber-50 text-amber-700')"
+                              th:text="${talk.status}">PENDING</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements placeholder -->
+            <div class="bg-white rounded-xl border border-gray-200 p-5 mt-4">
+                <h2 class="text-sm font-semibold text-gray-900 mb-1.5">Achievements</h2>
+                <p class="text-sm text-gray-400">Coming soon...</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-gray-300 text-xs py-6 text-center">
+                &copy; 2026 PragmaTech &middot; <a href="#" class="hover:text-gray-500">Imprint</a>
             </div>
         </div>
     </div>
 
-    <!-- Achievements placeholder -->
-    <div class="bg-white rounded-lg shadow-sm p-6 mt-4">
-        <h2 class="text-lg font-semibold text-gray-800 mb-2">Achievements</h2>
-        <p class="text-sm text-gray-400 italic">Achievements coming soon...</p>
+    <!-- Right: Tour Map -->
+    <div class="w-1/2">
+        <div id="tourMap" class="w-full h-full"></div>
     </div>
 </div>
 
-<footer class="bg-gray-800 text-gray-300 text-sm py-3 text-center mt-8">
-    © 2026 PragmaTech | <a href="#" class="hover:text-white">Imprint</a>
-</footer>
+<script th:inline="javascript">
+    var speakerJugs = JSON.parse(/*[[${speakerJugsJson}]]*/ '[]');
+</script>
+<script>
+(function () {
+    var map = L.map('tourMap', { zoomControl: false }).setView([45, 10], 3);
+    L.control.zoom({ position: 'topright' }).addTo(map);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 19,
+        subdomains: 'abcd'
+    }).addTo(map);
+
+    var spokeIcon = L.divIcon({
+        html: '<div style="background:#16a34a;width:14px;height:14px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(22,163,74,0.4);"></div>',
+        className: '',
+        iconSize: [14, 14],
+        iconAnchor: [7, 7],
+        popupAnchor: [0, -10]
+    });
+
+    if (speakerJugs.length > 0) {
+        var bounds = [];
+        speakerJugs.forEach(function (jug) {
+            var latlng = [jug.lat, jug.lng];
+            bounds.push(latlng);
+            var marker = L.marker(latlng, { icon: spokeIcon }).addTo(map);
+            marker.bindPopup(
+                '<div style="min-width:140px">' +
+                '<strong style="font-size:13px;"><a href="/jugs/' + jug.slug + '" style="color:#16a34a;text-decoration:none;">' + jug.name + '</a></strong>' +
+                '<br><span style="color:#71717a;font-size:11px;">' + jug.city + ', ' + jug.country + '</span>' +
+                '<br><span style="color:#16a34a;font-size:11px;font-weight:600;">' + jug.talkCount + (jug.talkCount === 1 ? ' talk' : ' talks') + '</span>' +
+                '</div>'
+            );
+        });
+        map.fitBounds(bounds, { padding: [50, 50], maxZoom: 6 });
+    }
+})();
+</script>
 </body>
 </html>

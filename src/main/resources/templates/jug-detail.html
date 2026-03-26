@@ -2,51 +2,104 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" th:content="${jug.name} + ' — ' + ${jug.city} + ', ' + ${jug.country} + '. Explore this Java User Group on Tour de JUG.'">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" th:content="${jug.name} + ' — Tour de JUG'">
+    <meta property="og:description" th:content="${jug.name} + ' — ' + ${jug.city} + ', ' + ${jug.country} + '. Explore this Java User Group on Tour de JUG.'">
+    <meta property="og:image" content="/images/og-image.svg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" th:content="${jug.name} + ' — Tour de JUG'">
+    <meta name="twitter:description" th:content="${jug.name} + ' — ' + ${jug.city} + ', ' + ${jug.country}">
+    <meta name="twitter:image" content="/images/og-image.svg">
+
     <title th:text="${jug.name} + ' — Tour de JUG'">JUG Detail</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 700: '#c2410c' }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        .leaflet-popup-content-wrapper { border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    </style>
 </head>
-<body class="bg-gray-50">
-<nav class="bg-indigo-700 text-white px-6 py-4 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold">Tour de JUG ☕</a>
+<body class="bg-gray-50 font-sans antialiased">
+
+<nav class="bg-white border-b border-gray-200 px-6 h-14 flex items-center">
+    <a href="/" class="flex items-center gap-2 text-lg font-bold text-gray-900 tracking-tight">
+        <span class="text-2xl">&#9749;</span>
+        <span>Tour de JUG</span>
+    </a>
 </nav>
-<div class="max-w-3xl mx-auto px-4 py-8">
-    <a href="/" class="text-indigo-600 hover:underline text-sm mb-4 inline-block">← Back to Map</a>
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+
+<div class="max-w-3xl mx-auto px-4 py-10">
+    <a href="/" class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-brand-600 mb-6 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back to Map
+    </a>
+
+    <div class="bg-white rounded-xl border border-gray-200 p-8 mb-6">
         <h1 class="text-2xl font-bold text-gray-900" th:text="${jug.name}">JUG Name</h1>
-        <p class="text-gray-500 mt-1" th:text="${jug.city} + ', ' + ${jug.country}">City, Country</p>
+        <p class="text-gray-400 mt-1 text-sm" th:text="${jug.city} + ', ' + ${jug.country}">City, Country</p>
 
-        <div th:if="${jug.description}" class="mt-4 text-gray-700" th:text="${jug.description}"></div>
+        <div th:if="${jug.description}" class="mt-4 text-gray-600 text-sm leading-relaxed" th:text="${jug.description}"></div>
 
-        <div class="flex flex-wrap gap-3 mt-4">
+        <div class="flex flex-wrap gap-2 mt-5">
             <a th:if="${jug.homepageUrl}" th:href="${jug.homepageUrl}" target="_blank"
-               class="text-sm bg-indigo-100 text-indigo-700 px-3 py-1 rounded hover:bg-indigo-200">Website</a>
+               class="inline-flex items-center gap-1.5 text-sm bg-gray-100 text-gray-700 px-4 py-1.5 rounded-lg hover:bg-gray-200 font-medium transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                Website
+            </a>
             <a th:if="${jug.meetupUrl}" th:href="${jug.meetupUrl}" target="_blank"
-               class="text-sm bg-orange-100 text-orange-700 px-3 py-1 rounded hover:bg-orange-200">Meetup</a>
+               class="inline-flex items-center gap-1.5 text-sm bg-orange-50 text-orange-700 px-4 py-1.5 rounded-lg hover:bg-orange-100 font-medium transition-colors">Meetup</a>
             <a th:if="${jug.socialUrl}" th:href="${jug.socialUrl}" target="_blank"
-               class="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200">Social</a>
+               class="inline-flex items-center gap-1.5 text-sm bg-brand-50 text-brand-700 px-4 py-1.5 rounded-lg hover:bg-brand-100 font-medium transition-colors">Social</a>
         </div>
 
-        <p th:if="${jug.establishedYear}" class="text-sm text-gray-500 mt-3">
+        <p th:if="${jug.establishedYear}" class="text-xs text-gray-400 mt-4 font-medium uppercase tracking-wide">
             Established <span th:text="${jug.establishedYear}">2009</span>
         </p>
     </div>
 
-    <div th:if="${jug.latitude != null and jug.longitude != null}" id="jugMap" class="rounded-lg overflow-hidden shadow-sm mb-6" style="height:300px;"></div>
+    <div th:if="${jug.latitude != null and jug.longitude != null}"
+         id="jugMap" class="rounded-xl overflow-hidden border border-gray-200 mb-6" style="height:300px;"></div>
 </div>
-<footer class="bg-gray-800 text-gray-300 text-sm py-3 text-center mt-8">
-    © 2026 PragmaTech | <a href="#" class="hover:text-white">Imprint</a>
+
+<footer class="border-t border-gray-200 text-gray-400 text-xs py-4 text-center mt-8">
+    &copy; 2026 PragmaTech &middot; <a href="#" class="hover:text-gray-600">Imprint</a>
 </footer>
+
 <script th:if="${jug.latitude != null and jug.longitude != null}" th:inline="javascript">
     var lat = /*[[${jug.latitude}]]*/ 0;
     var lng = /*[[${jug.longitude}]]*/ 0;
     var name = /*[[${jug.name}]]*/ '';
     var jugMap = L.map('jugMap').setView([lat, lng], 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap &copy; CARTO',
+        subdomains: 'abcd'
     }).addTo(jugMap);
-    L.marker([lat, lng]).addTo(jugMap).bindPopup(name).openPopup();
+    var icon = L.divIcon({
+        html: '<div style="background:#ea580c;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.25);"></div>',
+        className: '',
+        iconSize: [14, 14],
+        iconAnchor: [7, 7]
+    });
+    L.marker([lat, lng], { icon: icon }).addTo(jugMap).bindPopup(name).openPopup();
 </script>
 </body>
 </html>

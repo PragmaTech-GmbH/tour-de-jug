@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: tour-de-jug
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tourdegjug
+    username: tourdegjug
+    password: secret
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID:change-me}
+            client-secret: ${GITHUB_CLIENT_SECRET:change-me}

@@ -23,7 +23,8 @@ public class OAuthUserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
-        Long githubId = ((Number) oAuth2User.getAttribute("id")).longValue();
+        Object rawId = oAuth2User.getAttribute("id");
+        Long githubId = rawId instanceof Number ? ((Number) rawId).longValue() : Long.parseLong(rawId.toString());
         String username = oAuth2User.getAttribute("login");
         String avatarUrl = oAuth2User.getAttribute("avatar_url");
         String email = oAuth2User.getAttribute("email");

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#faf5ff"/>
+      <stop offset="100%" style="stop-color:#f3e8ff"/>
+    </linearGradient>
+    <linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e9d5ff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#d8b4fe;stop-opacity:0.15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Simplified world map outlines -->
+  <g fill="url(#ocean)" stroke="#d8b4fe" stroke-width="0.8" opacity="0.6" transform="translate(100,120) scale(2.2,1.8)">
+    <!-- North America -->
+    <path d="M60,80 Q80,60 120,65 Q140,55 160,70 Q170,90 150,110 Q130,130 100,125 Q70,120 60,100 Z"/>
+    <!-- South America -->
+    <path d="M130,160 Q145,145 155,155 Q165,180 160,210 Q150,240 140,230 Q125,200 130,175 Z"/>
+    <!-- Europe -->
+    <path d="M230,65 Q250,55 270,60 Q280,70 275,85 Q260,95 245,90 Q235,80 230,65 Z"/>
+    <!-- Africa -->
+    <path d="M240,100 Q260,95 270,105 Q280,130 275,160 Q265,180 250,175 Q235,155 235,130 Z"/>
+    <!-- Asia -->
+    <path d="M285,50 Q330,40 370,55 Q400,65 390,90 Q370,100 340,95 Q310,90 290,80 Q280,65 285,50 Z"/>
+    <!-- Australia -->
+    <path d="M380,170 Q400,160 415,170 Q420,185 410,195 Q395,195 385,185 Z"/>
+  </g>
+
+  <!-- Map pins -->
+  <g>
+    <!-- London -->
+    <circle cx="530" cy="225" r="7" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <circle cx="530" cy="225" r="12" fill="#9333ea" opacity="0.2"/>
+    <!-- Hamburg -->
+    <circle cx="555" cy="215" r="7" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <circle cx="555" cy="215" r="12" fill="#9333ea" opacity="0.2"/>
+    <!-- Paris -->
+    <circle cx="540" cy="240" r="7" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <circle cx="540" cy="240" r="12" fill="#9333ea" opacity="0.2"/>
+    <!-- Zurich -->
+    <circle cx="555" cy="245" r="6" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <!-- Amsterdam -->
+    <circle cx="543" cy="220" r="6" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <!-- Stockholm -->
+    <circle cx="565" cy="195" r="6" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <!-- Madrid -->
+    <circle cx="518" cy="260" r="6" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <!-- Berlin -->
+    <circle cx="565" cy="222" r="6" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <!-- Prague -->
+    <circle cx="570" cy="235" r="6" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <!-- San Francisco -->
+    <circle cx="230" cy="265" r="7" fill="#9333ea" stroke="#fff" stroke-width="2"/>
+    <circle cx="230" cy="265" r="12" fill="#9333ea" opacity="0.2"/>
+  </g>
+
+  <!-- Duke mascot (simplified) -->
+  <g transform="translate(920,280) scale(1.2)">
+    <!-- Body -->
+    <ellipse cx="60" cy="100" rx="45" ry="55" fill="#e8590c"/>
+    <!-- Head -->
+    <ellipse cx="60" cy="45" rx="35" ry="30" fill="#e8590c"/>
+    <!-- Nose/beak -->
+    <polygon points="60,35 80,55 60,55" fill="#fbbf24"/>
+    <!-- Eye -->
+    <circle cx="48" cy="38" r="8" fill="white"/>
+    <circle cx="50" cy="38" r="4" fill="#1e293b"/>
+    <circle cx="51" cy="37" r="1.5" fill="white"/>
+    <!-- Hair spike -->
+    <polygon points="55,15 65,0 70,20" fill="#e8590c"/>
+    <polygon points="40,18 45,2 55,22" fill="#e8590c"/>
+    <!-- Arm waving -->
+    <path d="M105,80 Q130,60 140,40" stroke="#e8590c" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <!-- Hand -->
+    <circle cx="140" cy="38" r="10" fill="#e8590c"/>
+    <!-- Feet -->
+    <ellipse cx="40" cy="155" rx="18" ry="8" fill="#e8590c"/>
+    <ellipse cx="80" cy="155" rx="18" ry="8" fill="#e8590c"/>
+  </g>
+
+  <!-- Title text -->
+  <text x="100" y="480" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#1e1b4b">
+    <tspan>&#9749; Tour de JUG</tspan>
+  </text>
+  <text x="100" y="530" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#6b7280">
+    Discover Java User Groups worldwide
+  </text>
+
+  <!-- Subtle border -->
+  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#e9d5ff" stroke-width="4" rx="0"/>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="620" width="1200" height="10" fill="#9333ea"/>
+</svg>

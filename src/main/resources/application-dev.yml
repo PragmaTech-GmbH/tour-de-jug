@@ -1,0 +1,17 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: tour-de-jug-app
+            client-secret: dev-secret
+            scope: openid,profile,email
+        provider:
+          github:
+            authorization-uri: http://localhost:9090/realms/tour-de-jug/protocol/openid-connect/auth
+            token-uri: http://localhost:9090/realms/tour-de-jug/protocol/openid-connect/token
+            user-info-uri: http://localhost:9090/realms/tour-de-jug/protocol/openid-connect/userinfo
+            user-name-attribute: login
+            jwk-set-uri: http://localhost:9090/realms/tour-de-jug/protocol/openid-connect/certs
+            issuer-uri: http://localhost:9090/realms/tour-de-jug
