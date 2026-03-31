@@ -61,7 +61,17 @@
         <span>Tour de JUG</span>
     </a>
     <div class="flex items-center gap-4 text-sm">
+        <span class="text-gray-500 text-xs tracking-wide">
+            <span th:text="${jugCount}" class="font-semibold text-gray-700">0</span> JUGs registered
+            <span class="mx-1">&middot;</span>
+            <span th:text="${speakerCount}" class="font-semibold text-gray-700">0</span> speakers
+        </span>
         <span sec:authorize="isAuthenticated()" class="flex items-center gap-3">
+            <a href="/speaking-events/new"
+               class="inline-flex items-center gap-1.5 bg-brand-600 text-white px-3.5 py-1.5 rounded-lg text-sm font-medium hover:bg-brand-700 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Submit Talk
+            </a>
             <a th:href="@{/profiles/{u}(u=${#authentication.name})}"
                class="text-gray-700 hover:text-brand-600 font-medium transition-colors" sec:authentication="name">User</a>
             <a href="/logout" class="text-gray-400 hover:text-gray-600 transition-colors">Logout</a>
@@ -128,7 +138,6 @@
                 </div>
             </div>
             <footer class="p-4 border-t border-gray-100 space-y-1.5 shrink-0">
-                <a href="/speaking-events/new" sec:authorize="isAuthenticated()" class="block text-xs text-brand-600 hover:text-brand-700 font-medium">Submit a Talk</a>
                 <p class="text-xs text-gray-400 leading-relaxed">
                     Want your JUG listed?
                     <a href="https://github.com/rieckpil/tour-de-jug" class="text-brand-600 hover:text-brand-700 font-medium" target="_blank">Submit a PR</a>

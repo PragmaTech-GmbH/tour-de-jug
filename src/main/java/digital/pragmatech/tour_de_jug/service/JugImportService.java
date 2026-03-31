@@ -83,7 +83,6 @@ public class JugImportService implements ApplicationRunner {
     private void updateJug(JavaUserGroup jug, Map<String, Object> data) {
         applyData(jug, data);
         jug.setUpdatedAt(Instant.now());
-        jug.setInactiveSince(null);
         jugRepository.save(jug);
     }
 
@@ -99,5 +98,10 @@ public class JugImportService implements ApplicationRunner {
         if (data.get("latitude") != null) jug.setLatitude(((Number) data.get("latitude")).doubleValue());
         if (data.get("longitude") != null) jug.setLongitude(((Number) data.get("longitude")).doubleValue());
         if (data.get("established_year") != null) jug.setEstablishedYear((Integer) data.get("established_year"));
+        if (Boolean.FALSE.equals(data.get("active"))) {
+            if (jug.getInactiveSince() == null) jug.setInactiveSince(Instant.now());
+        } else {
+            jug.setInactiveSince(null);
+        }
     }
 }

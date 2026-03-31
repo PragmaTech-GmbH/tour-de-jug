@@ -33,8 +33,9 @@
             var item = document.createElement('div');
             item.className = 'jug-item px-4 py-3 cursor-pointer';
             item.dataset.slug = jug.slug;
-            item.innerHTML =
-                '<p class="font-medium text-sm text-gray-800 leading-snug">' + escHtml(jug.name) + '</p>' +
+            var nameHtml = '<p class="font-medium text-sm leading-snug ' + (jug.inactive ? 'text-gray-400' : 'text-gray-800') + '">' + escHtml(jug.name) +
+                (jug.inactive ? ' <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-500">Inactive</span>' : '') + '</p>';
+            item.innerHTML = nameHtml +
                 '<p class="text-xs text-gray-400 mt-0.5">' + escHtml(jug.city) + ', ' + escHtml(jug.country) + '</p>';
             item.addEventListener('click', function () {
                 selectJug(jug.slug);
@@ -59,18 +60,20 @@
     }
 
     jugsData.forEach(function (jug) {
-        var marker = L.marker([jug.lat, jug.lng], { icon: jugIcon }).addTo(map);
-        marker.bindPopup(
-            '<div style="min-width:160px">' +
-            '<strong style="font-size:14px;"><a href="/jugs/' + jug.slug + '" style="color:#c2410c;text-decoration:none;">' + escHtml(jug.name) + '</a></strong>' +
-            '<br><span style="color:#71717a;font-size:12px;">' + escHtml(jug.city) + ', ' + escHtml(jug.country) + '</span>' +
-            (jug.homepageUrl ? '<br><a href="' + jug.homepageUrl + '" target="_blank" style="color:#ea580c;font-size:12px;text-decoration:none;">Visit website &rarr;</a>' : '') +
-            '</div>'
-        );
-        marker.on('click', function () {
-            selectJug(jug.slug);
-        });
-        markers[jug.slug] = marker;
+        if (jug.lat != null && jug.lng != null) {
+            var marker = L.marker([jug.lat, jug.lng], { icon: jugIcon }).addTo(map);
+            marker.bindPopup(
+                '<div style="min-width:160px">' +
+                '<strong style="font-size:14px;"><a href="/jugs/' + jug.slug + '" style="color:#c2410c;text-decoration:none;">' + escHtml(jug.name) + '</a></strong>' +
+                '<br><span style="color:#71717a;font-size:12px;">' + escHtml(jug.city) + ', ' + escHtml(jug.country) + '</span>' +
+                (jug.homepageUrl ? '<br><a href="' + jug.homepageUrl + '" target="_blank" style="color:#ea580c;font-size:12px;text-decoration:none;">Visit website &rarr;</a>' : '') +
+                '</div>'
+            );
+            marker.on('click', function () {
+                selectJug(jug.slug);
+            });
+            markers[jug.slug] = marker;
+        }
     });
 
     renderList(jugsData);

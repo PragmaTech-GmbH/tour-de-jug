@@ -1,81 +1,2500 @@
+# Java User Groups Registry
+#
+# This file is the source of truth for all JUGs shown on Tour de JUG.
+# On application startup, JugImportService syncs this file to the database
+# using the "slug" field as stable identifier (not the database UUID).
+#
+# Contributing via Pull Request:
+#   - Add a new JUG:    append an entry with a unique slug (lowercase, hyphens, no special chars)
+#   - Update a JUG:     edit fields (name, homepage_url, description, etc.) — keep the slug unchanged
+#   - Deactivate a JUG: add "active: false" to the entry
+#   - NEVER rename a slug — it would orphan linked talk events in the database
+#
+# Required fields: slug, name, country
+# Optional fields: city, homepage_url, latitude, longitude, established_year, active
+#
+# Coordinates should point to the city center (used for the map).
+# To regenerate this file from public sources, run:
+#   RUN_SCRAPER=true ./mvnw test -Dtest=JugDataScraperTest
+
 jugs:
-  - slug: londonjavacommunity
-    name: London Java Community
-    city: London
-    country: UK
-    homepage_url: https://www.londonjavacommunity.co.uk
-    latitude: 51.5074
-    longitude: -0.1278
-    established_year: 2009
-  - slug: jug-hamburg
-    name: JUG Hamburg
-    city: Hamburg
-    country: Germany
-    homepage_url: https://www.jug-hamburg.de
-    latitude: 53.5753
-    longitude: 10.0153
-    established_year: 2001
-  - slug: jug-ch
-    name: JUG Switzerland
-    city: Zurich
-    country: Switzerland
-    homepage_url: https://www.jug.ch
-    latitude: 47.3769
-    longitude: 8.5417
-    established_year: 2000
-  - slug: nljug
-    name: NLJUG (Dutch Java User Group)
-    city: Amsterdam
-    country: Netherlands
-    homepage_url: https://nljug.org
-    latitude: 52.3676
-    longitude: 4.9041
-    established_year: 1998
-  - slug: jfokus
-    name: Stockholm JUG
-    city: Stockholm
-    country: Sweden
-    homepage_url: https://www.stockholmjug.se
-    latitude: 59.3293
-    longitude: 18.0686
-    established_year: 2007
-  - slug: paris-jug
-    name: Paris JUG
-    city: Paris
-    country: France
-    homepage_url: https://www.parisjug.org
-    latitude: 48.8566
-    longitude: 2.3522
-    established_year: 2009
-  - slug: madrid-jug
-    name: Madrid JUG
-    city: Madrid
-    country: Spain
-    homepage_url: https://madridjug.es
-    latitude: 40.4168
-    longitude: -3.7038
-    established_year: 2009
-  - slug: jug-bb
-    name: JUG Berlin-Brandenburg
-    city: Berlin
-    country: Germany
-    homepage_url: https://www.jug-bb.de
-    latitude: 52.5200
-    longitude: 13.4050
-    established_year: 2001
-  - slug: czjug
-    name: Czech JUG
-    city: Prague
-    country: Czech Republic
-    homepage_url: https://www.czjug.cz
-    latitude: 50.0755
-    longitude: 14.4378
-    established_year: 2007
-  - slug: sfjug
-    name: San Francisco JUG
-    city: San Francisco
-    country: USA
-    homepage_url: https://www.sfjava.org
-    latitude: 37.7749
-    longitude: -122.4194
-    established_year: 2000
+- slug: "a-jug-for-everyone"
+  name: "A JUG for Everyone"
+  city: "London"
+  country: "England"
+  homepage_url: "https://ajugforevery.one/"
+  latitude: 51.5074456
+  longitude: -0.1277653
+- slug: "abidjan-java-user-group"
+  name: "Abidjan Java User Group"
+  city: "Abidjan"
+  country: "Côte d'Ivoire"
+  homepage_url: "https://www.facebook.com/abidjanjug/"
+  latitude: 5.320357
+  longitude: -4.016107
+- slug: "abuja-nigeria-jug"
+  name: "Abuja Nigeria JUG"
+  city: "Abuja"
+  country: "Nigeria"
+  latitude: 9.0643305
+  longitude: 7.4892974
+  active: false
+- slug: "algeria-java-user-group"
+  name: "Algeria Java User Group"
+  country: "Algeria"
+  latitude: 28.0000272
+  longitude: 2.9999825
+  active: false
+- slug: "almaty-java-user-group"
+  name: "Almaty Java User Group"
+  city: "Almaty"
+  country: "Kazakhstan"
+  homepage_url: "https://www.meetup.com/ru-RU/almaty-java-user-group/"
+  latitude: 43.2363924
+  longitude: 76.9457275
+- slug: "almatyjug"
+  name: "AlmatyJUG"
+  city: "Almaty"
+  country: "Kazakhstan"
+  homepage_url: "https://wearecommunity.io/events/i1AVWjFqtD"
+  latitude: 43.2363924
+  longitude: 76.9457275
+- slug: "alpesjug"
+  name: "AlpesJUG"
+  city: "Grenoble"
+  country: "France"
+  homepage_url: "http://alpesjug.org"
+  latitude: 45.1875602
+  longitude: 5.7357819
+- slug: "amazonas-java-user-group"
+  name: "Amazonas Java User Group"
+  city: "Manaus"
+  country: "Brazil"
+  homepage_url: "https://javaamazonas.com.br/"
+  latitude: -3.1316333
+  longitude: -59.9825041
+- slug: "amsterdam-java-user-group"
+  name: "Amsterdam Java User Group"
+  city: "Amsterdam"
+  country: "Netherlands"
+  homepage_url: "https://www.meetup.com/amsterdam-java-user-group/"
+  latitude: 52.3730796
+  longitude: 4.8924534
+- slug: "apeldoorn-java-user-group"
+  name: "Apeldoorn Java User Group"
+  city: "Apeldoorn"
+  country: "The Neatherlands"
+  homepage_url: "https://www.meetup.com/nl-NL/apeldoornjug/"
+  latitude: 52.1795738
+  longitude: 5.9300775
+- slug: "arab-java-user-group"
+  name: "Arab Java User Group"
+  city: "Beirut"
+  country: "Lebanon"
+  homepage_url: "https://www.meetup.com/arab-java-user-group/"
+  latitude: 33.8959203
+  longitude: 35.47843
+- slug: "argentinacordoba-java-user-group"
+  name: "Argentina/Cordoba Java User Group"
+  city: "Cordoba"
+  country: "Argentina"
+  homepage_url: "https://www.java.net.ar/en?referrer=grok.com"
+  latitude: -31.4166867
+  longitude: -64.1834193
+- slug: "arnhem-java-user-group"
+  name: "Arnhem Java User Group"
+  city: "Arnhem"
+  country: "Netherlands"
+  homepage_url: "https://www.meetup.com/nl-NL/arnhemjug/"
+  latitude: 51.984257
+  longitude: 5.9108573
+- slug: "astana-java-user-group"
+  name: "Astana Java User Group"
+  city: "Astana"
+  country: "Kazakhstan"
+  homepage_url: "https://www.facebook.com/astanajug"
+  latitude: 51.1282205
+  longitude: 71.4306682
+- slug: "atlanta-java-user-group"
+  name: "Atlanta Java User Group"
+  city: "Atlanta"
+  country: "USA"
+  homepage_url: "http://www.ajug.org/"
+  latitude: 33.7544657
+  longitude: -84.3898151
+- slug: "austin-java-user-group"
+  name: "Austin Java User Group"
+  city: "Austin"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/Austin-Java-Users-Group/"
+  latitude: 30.2711286
+  longitude: -97.7436995
+- slug: "bangalore-java-user-group"
+  name: "Bangalore Java User Group"
+  city: "Bangalore"
+  country: "India"
+  homepage_url: "http://meetup.com/BangaloreOpenJUG"
+  latitude: 12.9767936
+  longitude: 77.590082
+- slug: "barcelona-java-user-group"
+  name: "Barcelona Java User Group"
+  city: "Barcelona"
+  country: "Spain"
+  homepage_url: "https://barcelonajug.org/"
+  latitude: 41.3825802
+  longitude: 2.177073
+- slug: "barranquilla-java-users-group"
+  name: "Barranquilla Java Users Group"
+  city: "Barranquilla"
+  country: "Colombia"
+  homepage_url: "http://jugbaq.org/"
+  latitude: 10.9938599
+  longitude: -74.7926118
+- slug: "beirut-java-user-group"
+  name: "Beirut Java User Group"
+  city: "Beirut"
+  country: "Lebanon"
+  homepage_url: "https://www.meetup.com/Beirut-Java-User-Group/"
+  latitude: 33.8959203
+  longitude: 35.47843
+- slug: "belarus-java-user-group"
+  name: "Belarus Java User Group"
+  city: "Minsk"
+  country: "Belarus"
+  homepage_url: "https://jprof.by/"
+  latitude: 53.9024716
+  longitude: 27.5618225
+- slug: "belgian-java-user-group"
+  name: "Belgian Java User Group"
+  city: "Brussels"
+  country: "Belgium"
+  homepage_url: "https://www.meetup.com/Belgian-Java-User-Group/"
+  latitude: 50.8467372
+  longitude: 4.352493
+- slug: "bentonville-java-users-group"
+  name: "Bentonville Java Users Group"
+  city: "Bentonville"
+  country: "USA"
+  latitude: 36.3728608
+  longitude: -94.208787
+  active: false
+- slug: "bialystok-java-user-group"
+  name: "Bialystok Java User Group"
+  city: "Bialystok"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/jug-bialystok/"
+  latitude: 53.132398
+  longitude: 23.1591679
+- slug: "bogot-jvm"
+  name: "Bogotá JVM"
+  city: "Bogotá"
+  country: "Colombia"
+  homepage_url: "https://www.bogotajvm.com.co/"
+  latitude: 4.6533817
+  longitude: -74.0836331
+- slug: "bolivian-jug"
+  name: "Bolivian JUG"
+  country: "Bolivia"
+  homepage_url: "https://www.facebook.com/BolivianJUG/"
+  latitude: -17.0568696
+  longitude: -64.9912286
+- slug: "bolzano-java-user-group"
+  name: "Bolzano Java User Group"
+  city: "Bolzano"
+  country: "Italy"
+  latitude: 46.4984781
+  longitude: 11.3547399
+  active: false
+- slug: "bordeaux-java-user-group"
+  name: "Bordeaux Java User Group"
+  city: "Bordeaux"
+  country: "France"
+  homepage_url: "http://www.bordeauxjug.org/"
+  latitude: 44.841225
+  longitude: -0.5800364
+- slug: "boston-java-meetup"
+  name: "Boston Java Meetup"
+  city: "Boston"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/boston-java/"
+  latitude: 42.3588336
+  longitude: -71.0578303
+- slug: "boston-java-users-acm-chapter"
+  name: "Boston Java Users ACM Chapter"
+  city: "Burlington"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/nejug1/"
+  latitude: 44.4761601
+  longitude: -73.212906
+- slug: "boulder-java-users-group"
+  name: "Boulder Java Users Group"
+  city: "Boulder"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/boulderjavausersgroup/"
+  latitude: 40.0149856
+  longitude: -105.270545
+- slug: "brabant-java-user-group"
+  name: "Brabant Java User Group"
+  city: "Brabant"
+  country: "Netherlands"
+  homepage_url: "https://www.linkedin.com/company/brabant-jug/"
+  latitude: 51.3104126
+  longitude: 3.5188213
+- slug: "brazildistrito-federal-java-user-group"
+  name: "Brazil/Distrito Federal Java User Group"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "brazilduke-duck-java-user-group"
+  name: "Brazil/Duke Duck Java User Group"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "braziljava-boa-vista"
+  name: "Brazil/Java Boa Vista"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "braziljava-natal"
+  name: "Brazil/Java Natal"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "braziljava-user-group-espirito-santo"
+  name: "Brazil/Java User Group Espirito Santo"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "braziljavabahia"
+  name: "Brazil/JavaBahia"
+  country: "Brazil"
+  homepage_url: "http://javabahia.blogspot.com/"
+  latitude: -10.3333333
+  longitude: -53.2
+- slug: "brazilmato-grosso-do-sul-java-users-group"
+  name: "Brazil/Mato Grosso do Sul Java Users Group"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "brazilredfoot-java-user-group"
+  name: "Brazil/RedFoot Java User Group"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "brazilserpro-java-user-group"
+  name: "Brazil/Serpro Java User Group"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "braziltoledo-java-user-group"
+  name: "Brazil/Toledo Java User Group"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "breizh-java-user-group"
+  name: "Breizh Java User Group"
+  city: "Rennes"
+  country: "France"
+  homepage_url: "http://www.breizhjug.org/"
+  latitude: 48.1113387
+  longitude: -1.6800198
+- slug: "brisbane-java-user-group"
+  name: "Brisbane Java User Group"
+  city: "Brisbane"
+  country: "Australia"
+  homepage_url: "https://www.meetup.com/brisjvm/"
+  latitude: -27.365991
+  longitude: 152.948963
+- slug: "brno-java-user-group"
+  name: "Brno Java User Group"
+  city: "Brno"
+  country: "Czech Republic"
+  homepage_url: "https://www.meetup.com/brno-java-meetup/"
+  latitude: 49.1922443
+  longitude: 16.6113382
+- slug: "brussels-java-user-group"
+  name: "Brussels Java User Group"
+  city: "Bruxelles"
+  country: "Belgium"
+  homepage_url: "https://www.meetup.com/BruJUG/"
+  latitude: 50.8467372
+  longitude: 4.352493
+- slug: "bucharest-java-user-group"
+  name: "Bucharest Java User Group"
+  city: "Bucharest"
+  country: "Romania"
+  homepage_url: "https://www.meetup.com/Bucharest-Java-User-Group/"
+  latitude: 44.4361414
+  longitude: 26.102684
+- slug: "budapest-javabar"
+  name: "Budapest JavaBar"
+  city: "Budapest"
+  country: "Hungary"
+  latitude: 47.4978789
+  longitude: 19.0402383
+  active: false
+- slug: "bulgarian-java-user-group"
+  name: "Bulgarian Java User Group"
+  city: "Sofia"
+  country: "Bulgaria"
+  homepage_url: "https://jug.bg/"
+  latitude: 42.6977028
+  longitude: 23.3217359
+- slug: "bydgoszcz-java-user-group"
+  name: "Bydgoszcz Java User Group"
+  city: "Bydgoszcz"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/bydgoszczjug/"
+  latitude: 53.1219648
+  longitude: 18.0002529
+- slug: "cali-java-users-group"
+  name: "Cali Java Users Group"
+  city: "Cali"
+  country: "Colombia"
+  homepage_url: "http://www.clojug.org/equipo/"
+  latitude: 3.4519988
+  longitude: -76.5325259
+- slug: "cameroon-java-user-group"
+  name: "Cameroon Java User Group"
+  city: "Douala"
+  country: "Cameroon"
+  latitude: 4.0429389
+  longitude: 9.7062018
+  active: false
+- slug: "canterbury-java-user-group"
+  name: "Canterbury Java User Group"
+  city: "Christchurch"
+  country: "Australia"
+  latitude: -31.7360649
+  longitude: 115.7537715
+  active: false
+- slug: "central-iowa-java-user-group"
+  name: "Central Iowa Java User Group"
+  city: "Des Moines"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/central-iowa-java-users-group/"
+  latitude: 41.5868654
+  longitude: -93.6249494
+- slug: "central-ohio-java-user-group"
+  name: "Central Ohio Java User Group"
+  city: "Columbus"
+  country: "USA"
+  homepage_url: "http://www.cojug.org/"
+  latitude: 39.9622601
+  longitude: -83.0007065
+- slug: "cern-java-user-group"
+  name: "CERN Java User Group"
+  city: "Meyrin"
+  country: "Switzerland"
+  homepage_url: "https://cern.ch/jug"
+  latitude: 46.2283226
+  longitude: 6.0712016
+- slug: "charlotte-java-user-group"
+  name: "Charlotte Java User Group"
+  city: "Charlotte"
+  country: "USA"
+  homepage_url: "https://cltjug.org/"
+  latitude: 35.2272086
+  longitude: -80.8430827
+- slug: "chesapeake-java-users-group"
+  name: "Chesapeake Java Users Group"
+  city: "Pasadena"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/chesapeakejug/"
+  latitude: 34.1476507
+  longitude: -118.144155
+- slug: "chhattisgarh-java-user-group"
+  name: "Chhattisgarh Java User Group"
+  city: "Raipur"
+  country: "India"
+  homepage_url: "https://linktr.ee/Java.User.Group.Chhattisgarh"
+  latitude: 21.2380912
+  longitude: 81.6336993
+- slug: "chicago-java-user-group"
+  name: "Chicago Java User Group"
+  city: "Chicago"
+  country: "USA"
+  homepage_url: "https://luma.com/cjug"
+  latitude: 41.8755616
+  longitude: -87.6244212
+- slug: "chile-java-user-group"
+  name: "Chile Java User Group"
+  country: "Chile"
+  homepage_url: "https://discord.gg/RFzqQAyaYV"
+  latitude: -31.7613365
+  longitude: -71.3187697
+- slug: "china-java-user-group"
+  name: "China Java User Group"
+  city: "Beijing"
+  country: "China"
+  latitude: 39.9057136
+  longitude: 116.3912972
+  active: false
+- slug: "code-darmor-java-user-group"
+  name: "Code d'Armor Java User Group"
+  city: "Lannion"
+  country: "France"
+  homepage_url: "https://codedarmor.fr/"
+  latitude: 48.7322183
+  longitude: -3.4587994
+- slug: "codelab-jug"
+  name: "CodeLab JUG"
+  city: "Utrecht"
+  country: "Netherlands"
+  homepage_url: "https://www.meetup.com/nl-nl/codelabjug/"
+  latitude: 52.0907006
+  longitude: 5.1215634
+- slug: "coffee-jug"
+  name: "Coffee JUG"
+  city: "Lviv"
+  homepage_url: "https://www.coffeejug.org/"
+  latitude: 49.841952
+  longitude: 24.0315921
+- slug: "comunidade-brasil-jug"
+  name: "Comunidade Brasil JUG"
+  city: "João Pessoa"
+  country: "Brazil"
+  homepage_url: "https://www.linkedin.com/in/devsjava/"
+  latitude: -7.1215981
+  longitude: -34.882028
+- slug: "comunidade-java-grude4j"
+  name: "Comunidade Java Grude4J"
+  city: "João Pessoa"
+  country: "Brazil"
+  homepage_url: "https://grude4j.github.io/grude4jsite/"
+  latitude: -7.1215981
+  longitude: -34.882028
+- slug: "congo-java-user-group"
+  name: "Congo Java User Group"
+  country: "Republic of Congo"
+  latitude: 1.403972
+  longitude: 103.7909392
+  active: false
+- slug: "connecticut-java-user-group"
+  name: "Connecticut Java User Group"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/Connecticut-Java-Users-Group/"
+  latitude: 39.7837304
+  longitude: -100.445882
+- slug: "coruna-java-user-group"
+  name: "Coruna Java User Group"
+  city: "A Coruña"
+  country: "Spain"
+  homepage_url: "https://www.meetup.com/CorunaJUG/"
+  latitude: 43.3709703
+  longitude: -8.3959425
+- slug: "cyprus-java-user-group"
+  name: "Cyprus Java User Group"
+  city: "Nicosia"
+  country: "Cyprus"
+  homepage_url: "https://www.meetup.com/jug-cy/"
+  latitude: 35.1746503
+  longitude: 33.3638783
+- slug: "czech-java-user-group"
+  name: "Czech Java User Group"
+  city: "Prague"
+  country: "Czech Republic"
+  homepage_url: "https://www.jug.cz/czjug-en/"
+  latitude: 50.0874654
+  longitude: 14.4212535
+- slug: "dallas-java-metroplex-user-group"
+  name: "Dallas Java Metroplex User Group"
+  city: "Dallas"
+  country: "USA"
+  homepage_url: "http://www.javamug.org/"
+  latitude: 32.7762719
+  longitude: -96.7968559
+- slug: "danish-jug-javagruppen"
+  name: "Danish JUG JavaGruppen"
+  city: "Copenhagen"
+  country: "Denmark"
+  homepage_url: "http://www.javagruppen.dk/"
+  latitude: 55.6867243
+  longitude: 12.5700724
+- slug: "dc-java-user-group"
+  name: "DC Java User Group"
+  city: "Washington"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/dc-jug/"
+  latitude: 38.8950982
+  longitude: -77.0363849
+- slug: "delhincr-java-user-group"
+  name: "DelhiNCR Java User Group"
+  city: "Delhi"
+  country: "India"
+  homepage_url: "https://www.meetup.com/Delhi-NCR-JUG/"
+  latitude: 28.6138954
+  longitude: 77.2090057
+- slug: "denver-java-user-group"
+  name: "Denver Java User Group"
+  city: "Denver"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/DenverJavaUsersGroup/"
+  latitude: 39.7392364
+  longitude: -104.984862
+- slug: "detroit-java-user-group"
+  name: "Detroit Java User Group"
+  city: "Detroit"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/detroit-java-user-group/"
+  latitude: 42.3315509
+  longitude: -83.0466403
+- slug: "discord-java-community"
+  name: "Discord java Community"
+  homepage_url: "https://discordjug.net/"
+- slug: "dominican-republic-java-user-community"
+  name: "Dominican Republic Java User Community"
+  country: "Dominican Republic"
+  homepage_url: "https://github.com/JavaDominicano"
+  latitude: 19.0974031
+  longitude: -70.3028026
+- slug: "dublin-java-user-group"
+  name: "Dublin Java User Group"
+  city: "Dublin"
+  country: "Ireland"
+  homepage_url: "https://www.dubjug.org/"
+  latitude: 53.3493795
+  longitude: -6.2605593
+- slug: "duisburg-jug"
+  name: "Duisburg JUG"
+  city: "Duisburg"
+  country: "Germany"
+  homepage_url: "https://www.jug-duisburg.de/"
+  latitude: 51.434999
+  longitude: 6.759562
+- slug: "east-bay-java-user-group"
+  name: "East Bay Java User Group"
+  city: "Oakland"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/eastbayjug/"
+  latitude: 37.8044557
+  longitude: -122.271356
+- slug: "ecuador-java-user-group"
+  name: "Ecuador Java User Group"
+  city: "Quito"
+  country: "Ecuador"
+  homepage_url: "http://www.ecuadorjug.org"
+  latitude: -0.2201641
+  longitude: -78.5123274
+- slug: "el-salvador-java-user-group"
+  name: "El Salvador Java User Group"
+  city: "San Salvador"
+  country: "El Salvador"
+  homepage_url: "https://linktr.ee/javaesajug"
+  latitude: 13.697629
+  longitude: -89.191156
+- slug: "elsass-java-user-group"
+  name: "Elsass Java User Group"
+  city: "Strasbourg"
+  country: "France"
+  homepage_url: "https://www.meetup.com/fr-FR/ElsassJUG/"
+  latitude: 48.584614
+  longitude: 7.7507127
+- slug: "enterprise-java-user-group-austria"
+  name: "Enterprise Java User Group Austria"
+  city: "Linz"
+  country: "Austria"
+  homepage_url: "https://www.meetup.com/de-DE/Enterprise-Java-User-Group-Austria/"
+  latitude: 48.3059078
+  longitude: 14.286198
+- slug: "fasojug"
+  name: "FASOJUG"
+  city: "Ouagadougou"
+  country: "Burkina Faso"
+  latitude: 12.3681873
+  longitude: -1.5270944
+  active: false
+- slug: "finist-java-user-group"
+  name: "Finist Java User Group"
+  city: "Brest"
+  country: "France"
+  homepage_url: "https://finistdevs.org/"
+  latitude: 48.3905283
+  longitude: -4.4860088
+- slug: "garden-state-java-user-group"
+  name: "Garden State Java User Group"
+  city: "Madison"
+  country: "United States of America"
+  homepage_url: "https://gsjug.org/"
+  latitude: 43.07469
+  longitude: -89.3841663
+- slug: "german-java-user-group"
+  name: "German Java User Group"
+  country: "Germany"
+  homepage_url: "https://java.de/roller/blog/category/News"
+  latitude: 51.1638175
+  longitude: 10.4478313
+- slug: "goinia-jug"
+  name: "Goiânia JUG"
+  city: "Goiânia"
+  country: "Brazil"
+  homepage_url: "https://gojavajug.github.io/"
+  latitude: -16.680882
+  longitude: -49.2532691
+- slug: "grand-tunisia-jug"
+  name: "Grand Tunisia JUG"
+  city: "Tunis"
+  country: "Tunisia"
+  homepage_url: "https://tunisia-jug-site.vercel.app/"
+  latitude: 36.8002068
+  longitude: 10.1857757
+- slug: "greater-lansing-java-user-group"
+  name: "Greater Lansing Java User Group"
+  city: "Lansing"
+  country: "USA"
+  latitude: 42.7338254
+  longitude: -84.5546295
+  active: false
+- slug: "greentea-java-user-group"
+  name: "GreenTea Java User Group"
+  country: "China"
+  homepage_url: "http://greenteajug.cn/"
+  latitude: 35.000074
+  longitude: 104.999927
+- slug: "greenville-java-user-group"
+  name: "Greenville Java User Group"
+  city: "Greenville"
+  country: "USA"
+  latitude: 34.851354
+  longitude: -82.3984882
+  active: false
+- slug: "grupo-de-usurios-java-de-santa-catarina"
+  name: "Grupo de Usu‚àö√â¬¨¬∞rios Java de Santa Catarina"
+  country: "Brazil"
+  homepage_url: "http://www.gujavasc.org/"
+  latitude: -10.3333333
+  longitude: -53.2
+- slug: "guadalajara-java-user-group"
+  name: "Guadalajara Java User Group"
+  city: "Guadalajara"
+  country: "Mexico"
+  homepage_url: "https://gdljug.github.io/"
+  latitude: 20.6720375
+  longitude: -103.338396
+- slug: "guangdong-java-user-group"
+  name: "Guangdong Java User Group"
+  country: "China"
+  latitude: 35.000074
+  longitude: 104.999927
+  active: false
+- slug: "guate-jug"
+  name: "Guate-JUG"
+  city: "Guatemala City"
+  country: "Guatemala"
+  homepage_url: "https://www.guate-jug.net/"
+  latitude: 14.6416142
+  longitude: -90.5132836
+- slug: "gujarat-java-user-group"
+  name: "Gujarat Java User Group"
+  city: "Gujarat"
+  country: "India"
+  homepage_url: "https://linktr.ee/juggujarat"
+  latitude: 22.3850051
+  longitude: 71.745261
+- slug: "hampton-roads-java-user-group"
+  name: "Hampton Roads Java User Group"
+  city: "Norfolk"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/hampton-roads-java-users-group/"
+  latitude: 36.8493695
+  longitude: -76.2899539
+- slug: "helsinki-java-user-group"
+  name: "Helsinki Java User Group"
+  city: "Helsinki"
+  country: "Finland"
+  homepage_url: "https://www.meetup.com/helsinki-java-user-group/"
+  latitude: 60.1666204
+  longitude: 24.9435408
+- slug: "hong-kong-java-user-group"
+  name: "Hong Kong Java User Group"
+  city: "Hong Kong"
+  country: "China"
+  homepage_url: "https://www.facebook.com/hkjug"
+  latitude: 22.2792968
+  longitude: 114.1628907
+- slug: "houston-java-user-group"
+  name: "Houston Java User Group"
+  city: "Houston"
+  country: "USA"
+  homepage_url: "http://www.hjug.org/"
+  latitude: 29.7589382
+  longitude: -95.3676974
+- slug: "hujak-croatian-java-user-association"
+  name: "HUJAK Croatian Java User Association"
+  city: "Zagreb"
+  country: "Croatia"
+  homepage_url: "https://hujak.hr"
+  latitude: 45.8130967
+  longitude: 15.9772795
+- slug: "iceland-java-user-group"
+  name: "Iceland Java User Group"
+  city: "Reykjavík"
+  country: "Iceland"
+  homepage_url: "https://www.linkedin.com/groups/102100/profile"
+  latitude: 64.145981
+  longitude: -21.9422367
+- slug: "ijug-java-user-group"
+  name: "iJUG Java User Group"
+  city: "Berlin"
+  country: "Germany"
+  homepage_url: "https://www.ijug.eu/en/home/"
+  latitude: 52.5173885
+  longitude: 13.3951309
+- slug: "illinois-java-users-group"
+  name: "Illinois Java Users Group"
+  city: "Chicago"
+  country: "USA"
+  homepage_url: "http://www.illinoisjug.org/"
+  latitude: 41.8755616
+  longitude: -87.6244212
+- slug: "indianapolis-java-user-group"
+  name: "Indianapolis Java User Group"
+  city: "Indianapolis"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/indianapolis-java-user-group/"
+  latitude: 39.7683331
+  longitude: -86.1583502
+- slug: "indonesian-java-user-group"
+  name: "Indonesian Java User Group"
+  country: "Indonesia"
+  latitude: -2.4833826
+  longitude: 117.8902853
+  active: false
+- slug: "jacksonville-jug"
+  name: "Jacksonville JUG"
+  city: "Jacksonville"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/Jacksonville-JAVA-User-Group-JaxJUG/"
+  latitude: 30.3262247
+  longitude: -81.6579179
+- slug: "japan-java-user-group"
+  name: "Japan Java User Group"
+  city: "Tokyo"
+  country: "Japan"
+  homepage_url: "https://www.java-users.jp/"
+  latitude: 35.6768601
+  longitude: 139.7638947
+- slug: "japan-java-womens-user-group"
+  name: "Japan Java Women's User Group"
+  city: "Nakano-Ku"
+  country: "Japan"
+  homepage_url: "https://javajo.doorkeeper.jp"
+  latitude: 35.7086179
+  longitude: 139.6629399
+- slug: "java-developers-group-vadodara"
+  name: "Java Developers Group Vadodara"
+  city: "Vadodara"
+  country: "India"
+  homepage_url: "https://www.linkedin.com/groups/12494605/"
+  latitude: 22.2973142
+  longitude: 73.1942567
+- slug: "java-duchess-netherlands-jug"
+  name: "Java Duchess Netherlands JUG"
+  country: "Netherlands"
+  homepage_url: "https://www.meetup.com/Duchess-NL/"
+  latitude: 52.2434979
+  longitude: 5.6343227
+  active: false
+- slug: "java-girls-jug"
+  name: "Java Girls JUG"
+  city: "Sao Paulo"
+  country: "Brasil"
+  homepage_url: "https://www.meetup.com/pt-BR/javagirlsjug/"
+  latitude: -23.5506507
+  longitude: -46.6333824
+- slug: "java-hispano"
+  name: "Java Hispano"
+  country: "Spain"
+  homepage_url: "http://www.javahispano.org/"
+  latitude: 39.3260685
+  longitude: -4.8379791
+- slug: "java-meetup-sp"
+  name: "Java Meetup SP"
+  city: "São Paulo"
+  country: "Brazil"
+  homepage_url: "https://www.meetup.com/Sao-Paulo-Java-Meetup/"
+  latitude: -23.5506507
+  longitude: -46.6333824
+- slug: "java-noroeste-user-group"
+  name: "Java Noroeste User Group"
+  country: "Brazil"
+  homepage_url: "http://www.javanoroeste.com.br/"
+  latitude: -10.3333333
+  longitude: -53.2
+- slug: "java-philippines"
+  name: "Java Philippines"
+  country: "Phillipines"
+  latitude: 38.8897021
+  longitude: -77.0401536
+  active: false
+- slug: "java-student-user-group"
+  name: "Java Student User Group"
+  city: "Vienna"
+  country: "Austria"
+  homepage_url: "https://www.java.wien/"
+  latitude: 48.2083537
+  longitude: 16.3725042
+- slug: "java-user-group-africa"
+  name: "Java User Group Africa"
+  country: "South Africa"
+  latitude: -28.8166236
+  longitude: 24.991639
+  active: false
+- slug: "java-user-group-albania"
+  name: "Java User Group Albania"
+  city: "Tirana"
+  country: "Albania"
+  homepage_url: "https://www.meetup.com/Java-User-Group-Tirana/"
+  latitude: 41.3281482
+  longitude: 19.8184435
+- slug: "java-user-group-ancona"
+  name: "Java User Group Ancona"
+  country: "Italy"
+  latitude: 42.6384261
+  longitude: 12.674297
+  active: false
+- slug: "java-user-group-ankara"
+  name: "Java User Group Ankara"
+  country: "Turkey"
+  latitude: 39.294076
+  longitude: 35.2316631
+  active: false
+- slug: "java-user-group-augsburg"
+  name: "Java User Group Augsburg"
+  city: "Augsburg"
+  country: "Germany"
+  latitude: 48.3690341
+  longitude: 10.8979522
+  active: false
+- slug: "java-user-group-baku"
+  name: "Java User Group Baku"
+  country: "Azerbaijan"
+  latitude: 40.3936294
+  longitude: 47.7872508
+  active: false
+- slug: "java-user-group-bangladesh"
+  name: "Java User Group Bangladesh"
+  city: "Dhaka"
+  country: "Bangladesh"
+  homepage_url: "https://jugbd.org/"
+  latitude: 23.7643863
+  longitude: 90.3890144
+- slug: "java-user-group-berlin-brandenburg"
+  name: "Java User Group Berlin Brandenburg"
+  city: "Berlin"
+  country: "Germany"
+  homepage_url: "https://twitter.com/jugbb"
+  latitude: 52.5173885
+  longitude: 13.3951309
+- slug: "java-user-group-bielefeld"
+  name: "Java User Group Bielefeld"
+  city: "Bielefeld"
+  country: "Germany"
+  homepage_url: "https://www.meetup.com/de-DE/Java-User-Group-Bielefeld/"
+  latitude: 52.0191005
+  longitude: 8.531007
+- slug: "java-user-group-bologna"
+  name: "Java User Group Bologna"
+  city: "Bologna"
+  country: "Italy"
+  homepage_url: "https://jugbologna.wordpress.com/"
+  latitude: 44.4938203
+  longitude: 11.3426327
+- slug: "java-user-group-bremen"
+  name: "Java User Group Bremen"
+  city: "Bremen"
+  country: "Germany"
+  homepage_url: "http://www.meetup.com/jugbremen/"
+  latitude: 53.0758196
+  longitude: 8.8071646
+- slug: "java-user-group-cochabamba"
+  name: "Java User Group Cochabamba"
+  city: "Cochabamba"
+  country: "Bolivia"
+  homepage_url: "https://www.facebook.com/share/12FptFkVXaV/?mibextid=wwXIfr"
+  latitude: -17.4012458
+  longitude: -66.1675681
+- slug: "java-user-group-cologne"
+  name: "Java User Group Cologne"
+  city: "Cologne"
+  country: "Germany"
+  homepage_url: "http://jugcologne.org/"
+  latitude: 50.938361
+  longitude: 6.959974
+- slug: "java-user-group-darmstadt"
+  name: "Java User Group Darmstadt"
+  city: "Darmstadt"
+  country: "Germany"
+  homepage_url: "https://www.jug-da.de/"
+  latitude: 49.872775
+  longitude: 8.651177
+- slug: "java-user-group-dortmund"
+  name: "Java User Group Dortmund"
+  city: "Dortmond"
+  country: "Germany"
+  homepage_url: "https://www.jugdo.de/"
+  latitude: 51.6575337
+  longitude: 5.048168
+- slug: "java-user-group-dsseldorf"
+  name: "Java User Group Düsseldorf"
+  city: "Düsseldorf"
+  homepage_url: "http://www.rheinjug.de/"
+  latitude: 51.2254018
+  longitude: 6.7763137
+- slug: "java-user-group-egypt"
+  name: "Java User Group Egypt"
+  country: "Egypt"
+  latitude: 26.2540493
+  longitude: 29.2675469
+  active: false
+- slug: "java-user-group-finland"
+  name: "Java User Group Finland"
+  country: "Finland"
+  latitude: 63.2467777
+  longitude: 25.9209164
+  active: false
+- slug: "java-user-group-freiburg"
+  name: "Java User Group Freiburg"
+  city: "Freiburg"
+  country: "Germany"
+  homepage_url: "https://jugfr.de/"
+  latitude: 47.9960901
+  longitude: 7.8494005
+- slug: "java-user-group-geneva"
+  name: "Java User Group Geneva"
+  city: "Geneva"
+  country: "Switzerland"
+  homepage_url: "https://www.meetup.com/java-meetup-geneva/"
+  latitude: 46.2017559
+  longitude: 6.1466014
+- slug: "java-user-group-genova"
+  name: "Java User Group Genova"
+  city: "Genova"
+  country: "Italy"
+  homepage_url: "https://juggenova.it/"
+  latitude: 44.40726
+  longitude: 8.9338624
+- slug: "java-user-group-goldstadt"
+  name: "Java User Group Goldstadt"
+  city: "Goldstadt"
+  country: "Germany"
+  homepage_url: "https://gitlab.com/jugpf"
+  latitude: 48.8964126
+  longitude: 8.6949526
+- slug: "java-user-group-grlitz"
+  name: "Java User Group Görlitz"
+  city: "Görlitz"
+  country: "Germany"
+  homepage_url: "https://www.jug-gr.de/"
+  latitude: 51.1563185
+  longitude: 14.991018
+- slug: "java-user-group-hamburg"
+  name: "Java User Group Hamburg"
+  city: "Hamburg"
+  country: "Germany"
+  homepage_url: "https://www.meetup.com/jug-hamburg/"
+  latitude: 53.5501721
+  longitude: 10.0013165
+- slug: "java-user-group-hannover"
+  name: "Java User Group Hannover"
+  city: "Hannover"
+  country: "Germany"
+  homepage_url: "https://www.meetup.com/java-user-group-hannover"
+  latitude: 52.3744779
+  longitude: 9.7385532
+- slug: "java-user-group-hessen"
+  name: "Java User Group Hessen"
+  city: "Hessen"
+  country: "Germany"
+  latitude: 52.0226742
+  longitude: 10.7894914
+- slug: "java-user-group-hokkaido"
+  name: "Java User Group Hokkaido"
+  country: "Japan"
+  homepage_url: "https://javado.connpass.com/"
+  latitude: 36.5748441
+  longitude: 139.2394179
+- slug: "java-user-group-ingolstadt-ev"
+  name: "Java User Group Ingolstadt e.V."
+  city: "Ingolstadt"
+  country: "Germany"
+  homepage_url: "https://jug-in.bayern/"
+  latitude: 48.7630165
+  longitude: 11.4250395
+- slug: "java-user-group-israel"
+  name: "Java User Group Israel"
+  city: "Tel Aviv"
+  country: "Israel"
+  homepage_url: "http://www.meetup.com/JavaIL/"
+  latitude: 32.0852997
+  longitude: 34.7818064
+- slug: "java-user-group-kaiserslautern"
+  name: "Java User Group Kaiserslautern"
+  city: "Kaiserslautern"
+  country: "Germany"
+  homepage_url: "http://www.jug-kl.de/"
+  latitude: 49.4432174
+  longitude: 7.7689951
+- slug: "java-user-group-karlsruhe"
+  name: "Java User Group Karlsruhe"
+  city: "Karsruhe"
+  country: "Germany"
+  homepage_url: "https://jug-karlsruhe.de/events/"
+- slug: "java-user-group-laquila"
+  name: "Java User Group L'Aquila"
+  city: "L'Aquila"
+  country: "Italy"
+  latitude: 42.3489203
+  longitude: 13.3979672
+  active: false
+- slug: "java-user-group-latvia"
+  name: "Java User Group Latvia"
+  city: "Riga"
+  country: "Latvia"
+  homepage_url: "https://x.com/latjug"
+  latitude: 56.9493977
+  longitude: 24.1051846
+- slug: "java-user-group-lausanne"
+  name: "Java User Group Lausanne"
+  city: "Lausanne"
+  country: "Switzerland"
+  homepage_url: "https://jugl.ch/"
+  latitude: 46.5218269
+  longitude: 6.6327025
+- slug: "java-user-group-lille"
+  name: "Java User Group Lille"
+  city: "Lille"
+  country: "France"
+  homepage_url: "http://chtijug.org/"
+  latitude: 50.6365654
+  longitude: 3.0635282
+- slug: "java-user-group-lorraine"
+  name: "Java User Group Lorraine"
+  city: "Nancy"
+  country: "France"
+  homepage_url: "https://twitter.com/lorrainejug?lang=en"
+  latitude: 48.6937223
+  longitude: 6.1834097
+- slug: "java-user-group-lugano"
+  name: "Java User Group Lugano"
+  city: "Lugano"
+  country: "Switzerland"
+  latitude: 46.0050102
+  longitude: 8.9520281
+  active: false
+- slug: "java-user-group-macedonia"
+  name: "Java User Group Macedonia"
+  city: "Skopje"
+  country: "Macedonia"
+  homepage_url: "http://jug.mk/"
+  latitude: 41.9961816
+  longitude: 21.4319213
+- slug: "java-user-group-mainz"
+  name: "Java User Group Mainz"
+  city: "Mainz"
+  country: "Germany"
+  homepage_url: "https://www.jug-mz.de/"
+  latitude: 49.9995205
+  longitude: 8.2736253
+- slug: "java-user-group-mannheim"
+  name: "Java User Group Mannheim"
+  city: "Mannheim"
+  country: "Germany"
+  homepage_url: "http://www.majug.de/"
+  latitude: 49.4892913
+  longitude: 8.4673098
+- slug: "java-user-group-milano"
+  name: "Java User Group Milano"
+  city: "Milano"
+  country: "Italy"
+  homepage_url: "http://www.jugmilano.it/"
+  latitude: 45.4641943
+  longitude: 9.1896346
+- slug: "java-user-group-monterrey"
+  name: "Java User Group Monterrey"
+  city: "Monterrey"
+  country: "Mexico"
+  latitude: 25.6802019
+  longitude: -100.315258
+  active: false
+- slug: "java-user-group-muenster"
+  name: "Java User Group Muenster"
+  city: "Muenster"
+  country: "Germany"
+  homepage_url: "https://www.jug-muenster.de/"
+  latitude: 51.9625101
+  longitude: 7.6251879
+- slug: "java-user-group-nagpur"
+  name: "Java User Group Nagpur"
+  city: "Nagpur"
+  country: "India"
+  homepage_url: "https://x.com/jugugnagpur"
+  latitude: 21.1498134
+  longitude: 79.0820556
+- slug: "java-user-group-oberpfalz"
+  name: "Java User Group Oberpfalz"
+  city: "Weiden in der Oberpfalz"
+  country: "Germany"
+  homepage_url: "https://www.meetup.com/de-DE/JUG-Oberpfalz/"
+  latitude: 49.6752749
+  longitude: 12.1631636
+- slug: "java-user-group-ostfalen"
+  name: "Java User Group Ostfalen"
+  city: "Ostfalen"
+  country: "Germany"
+  homepage_url: "https://www.jug-ostfalen.de/"
+  latitude: 53.6397907
+  longitude: 9.9794956
+- slug: "java-user-group-ostrava"
+  name: "Java User Group Ostrava"
+  city: "Ostrava"
+  country: "Czech Republic"
+  latitude: 49.8349139
+  longitude: 18.2820084
+  active: false
+- slug: "java-user-group-paderborn"
+  name: "Java User Group Paderborn"
+  city: "Paderborn"
+  country: "Germany"
+  homepage_url: "https://jug-pb.gitlab.io/"
+  latitude: 51.7177044
+  longitude: 8.752653
+- slug: "java-user-group-padova"
+  name: "Java User Group Padova"
+  city: "Padova"
+  country: "Italy"
+  homepage_url: "http://www.jugpadova.it/"
+  latitude: 45.4077172
+  longitude: 11.8734455
+- slug: "java-user-group-passau"
+  name: "Java User Group Passau"
+  city: "Passau"
+  country: "Germany"
+  homepage_url: "https://www.jug-passau.de/"
+  latitude: 48.5748229
+  longitude: 13.4609744
+- slug: "java-user-group-philippines"
+  name: "Java User Group Philippines"
+  city: "Manila"
+  country: "Philippines"
+  homepage_url: "https://www.jugph.com"
+  latitude: 14.5904492
+  longitude: 120.9803621
+- slug: "java-user-group-plovdiv"
+  name: "Java User Group Plovdiv"
+  city: "Plovdiv"
+  country: "Bulgaria"
+  homepage_url: "https://jug.bg/plovdiv"
+  latitude: 42.1418541
+  longitude: 24.7499297
+- slug: "java-user-group-plzen"
+  name: "Java User Group Plzen"
+  city: "Plzen"
+  country: "Czech Republic"
+  latitude: 49.7477415
+  longitude: 13.3775249
+  active: false
+- slug: "java-user-group-rome"
+  name: "Java User Group Rome"
+  city: "Rome"
+  country: "Italy"
+  homepage_url: "https://x.com/JugRoma"
+  latitude: 41.8933203
+  longitude: 12.4829321
+  active: false
+- slug: "java-user-group-russia"
+  name: "Java User Group Russia"
+  country: "Russia"
+  homepage_url: "http://jug.ru/"
+  latitude: 64.6863136
+  longitude: 97.7453061
+- slug: "java-user-group-saarland"
+  name: "Java User Group Saarland"
+  city: "Saarland"
+  country: "Germany"
+  homepage_url: "https://www.meetup.com/de-DE/Java-User-Group-Saarland-jugsaar/"
+  latitude: 49.3841872
+  longitude: 6.9537369
+- slug: "java-user-group-sardegna"
+  name: "Java User Group Sardegna"
+  city: "Sardegna"
+  country: "Italy"
+  homepage_url: "https://www.jugsardegna.org/"
+  latitude: 40.0912813
+  longitude: 9.0305773
+- slug: "java-user-group-saxony"
+  name: "Java User Group Saxony"
+  city: "Saxony"
+  country: "Germany"
+  homepage_url: "https://jugsaxony.org/"
+  latitude: 50.9295798
+  longitude: 13.4585052
+- slug: "java-user-group-scotland"
+  name: "Java User Group Scotland"
+  city: "Scotland"
+  country: "UK"
+  latitude: 56.7861112
+  longitude: -4.1140518
+- slug: "java-user-group-seville"
+  name: "Java User Group Seville"
+  city: "Seville"
+  country: "Spain"
+  homepage_url: "http://www.meetup.com/SVQJUG/"
+  latitude: 37.3886303
+  longitude: -5.9953403
+- slug: "java-user-group-sibiu"
+  name: "Java User Group Sibiu"
+  city: "Sibiu"
+  country: "Romania"
+  homepage_url: "https://www.facebook.com/sibiujug?fref=nf"
+  latitude: 45.7973912
+  longitude: 24.1519202
+- slug: "java-user-group-sicilia"
+  name: "Java User Group Sicilia"
+  city: "Sicilia"
+  country: "Italy"
+  homepage_url: "http://www.jugsicilia.it/"
+  latitude: 37.587794
+  longitude: 14.155048
+- slug: "java-user-group-slowakia"
+  name: "Java User Group Slowakia"
+  country: "Slovakia"
+  latitude: 48.7411522
+  longitude: 19.4528646
+  active: false
+- slug: "java-user-group-switzerland-basel"
+  name: "Java User Group Switzerland: Basel"
+  city: "Basel"
+  country: "Switzerland"
+  homepage_url: "https://www.jug.ch/"
+  latitude: 47.5581077
+  longitude: 7.5878261
+- slug: "java-user-group-switzerland-berne"
+  name: "Java User Group Switzerland: Berne"
+  city: "Berne"
+  country: "Switzerland"
+  homepage_url: "https://www.jug.ch/"
+  latitude: 46.9484742
+  longitude: 7.4521749
+- slug: "java-user-group-switzerland-lucerne"
+  name: "Java User Group Switzerland: Lucerne"
+  city: "Lucerne"
+  country: "Switzerland"
+  homepage_url: "https://www.jug.ch/"
+  latitude: 47.0505452
+  longitude: 8.3054682
+- slug: "java-user-group-switzerland-st-gallen"
+  name: "Java User Group Switzerland: St. Gallen"
+  city: "St. Gallen"
+  country: "Switzerland"
+  homepage_url: "https://www.jug.ch/"
+  latitude: 47.425618
+  longitude: 9.3762397
+- slug: "java-user-group-switzerland-zurich"
+  name: "Java User Group Switzerland: Zurich"
+  city: "Zurich"
+  country: "Switzerland"
+  homepage_url: "https://jug.ch/"
+  latitude: 47.3744489
+  longitude: 8.5410422
+- slug: "java-user-group-thringen"
+  name: "Java User Group Thüringen"
+  city: "Thüringen"
+  country: "Germany"
+  homepage_url: "http://www.jugth.de/de/#/"
+  latitude: 50.9014721
+  longitude: 11.0377839
+- slug: "java-user-group-timisoara"
+  name: "Java User Group Timisoara"
+  city: "Timisoara"
+  country: "Romania"
+  homepage_url: "http://www.meetup.com/TimisoaraJavaUserGroup/"
+  latitude: 45.7538355
+  longitude: 21.2257474
+- slug: "java-user-group-togo"
+  name: "Java User Group Togo"
+  city: "Togo"
+  country: "Togo"
+  latitude: 8.7800265
+  longitude: 1.0199765
+  active: false
+- slug: "java-user-group-torino"
+  name: "Java User Group Torino"
+  city: "Torino"
+  country: "Italy"
+  homepage_url: "https://www.meetup.com/JUGTorino/"
+  latitude: 45.0677551
+  longitude: 7.6824892
+- slug: "java-user-group-tours"
+  name: "Java User Group Tours"
+  city: "Tours"
+  country: "France"
+  homepage_url: "http://www.toursjug.org/"
+  latitude: 47.3900474
+  longitude: 0.6889268
+- slug: "java-user-group-turkey"
+  name: "Java User Group Turkey"
+  country: "Turkey"
+  homepage_url: "https://twitter.com/TurkeyJUG"
+  latitude: 39.294076
+  longitude: 35.2316631
+- slug: "java-user-group-udine"
+  name: "Java User Group Udine"
+  city: "Udine"
+  country: "Italy"
+  latitude: 46.0634632
+  longitude: 13.2358377
+  active: false
+- slug: "java-user-group-vilnius"
+  name: "Java User Group Vilnius"
+  city: "Vilnius"
+  country: "Lithuania"
+  homepage_url: "https://www.facebook.com/VilniusJUG/"
+  latitude: 54.6870458
+  longitude: 25.2829111
+- slug: "java-user-group-d"
+  name: "Java User Group Łódź"
+  city: "Łódź"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/java-user-group-lodz/"
+  latitude: 51.7687323
+  longitude: 19.4569911
+- slug: "java-user-groups-ghana"
+  name: "Java User Groups - Ghana"
+  city: "Accra"
+  country: "Ghana"
+  homepage_url: "https://www.meetup.com/java-user-groups-ghana/"
+  latitude: 5.5571096
+  longitude: -0.2012376
+- slug: "javabin-bergen"
+  name: "JavaBin Bergen"
+  city: "Bergen"
+  country: "Norway"
+  homepage_url: "https://www.meetup.com/javaBin-Bergen/"
+  latitude: 60.3943055
+  longitude: 5.3259192
+- slug: "javabin-oslo"
+  name: "JavaBin Oslo"
+  city: "Oslo"
+  country: "Norway"
+  homepage_url: "https://www.meetup.com/javaBin/"
+  latitude: 59.9133301
+  longitude: 10.7389701
+- slug: "javabin-sogn"
+  name: "JavaBin Sogn"
+  city: "Sogndalsfjøra"
+  country: "Norway"
+  homepage_url: "https://www.meetup.com/javaBin-Sogn/"
+  latitude: 61.2312231
+  longitude: 7.1029297
+- slug: "javabin-stavanger"
+  name: "JavaBin Stavanger"
+  city: "Stavanger"
+  country: "Norwary"
+  homepage_url: "https://www.meetup.com/javaBin-Stavanger/"
+  latitude: 58.9699675
+  longitude: 5.7318101
+- slug: "javabin-srlandet"
+  name: "JavaBin Sørlandet"
+  city: "Grimstad"
+  country: "Norway"
+  homepage_url: "https://www.meetup.com/javaBin-Sorlandet/"
+  latitude: 58.2839967
+  longitude: 8.7128291
+- slug: "javabin-troms"
+  name: "JavaBin Tromsø"
+  city: "Tromsø"
+  country: "Norway"
+  homepage_url: "https://www.meetup.com/javaBin-Tromso/"
+  latitude: 69.6516345
+  longitude: 18.9558585
+- slug: "javabin-trondheim"
+  name: "JavaBin Trondheim"
+  city: "Trondheim"
+  country: "Norway"
+  homepage_url: "https://www.meetup.com/javaBin-Trondheim/"
+  latitude: 63.4304475
+  longitude: 10.3952118
+- slug: "javabin-vestfold"
+  name: "JavaBin Vestfold"
+  city: "Vestfold"
+  country: "Norway"
+  homepage_url: "https://www.meetup.com/javaBin-Vestfold/"
+  latitude: 59.1954857
+  longitude: 10.2662616
+- slug: "javamexico"
+  name: "javaMexico"
+  city: "Mexico City"
+  country: "Mexico"
+  homepage_url: "https://www.javamexico.org/"
+  latitude: 19.4326296
+  longitude: -99.1331785
+- slug: "jcoder-java-user-group"
+  name: "JCoder Java User Group"
+  country: "China"
+  latitude: 35.000074
+  longitude: 104.999927
+  active: false
+- slug: "jespanol"
+  name: "Jespanol"
+  country: "Guatemala"
+  homepage_url: "http://www.jespanol.org/"
+  latitude: 15.5855545
+  longitude: -90.345759
+- slug: "joinville-java-user-group"
+  name: "Joinville Java User Group"
+  city: "Joinville"
+  country: "Brazil"
+  homepage_url: "https://jugjoinville.github.io/"
+  latitude: -26.3044898
+  longitude: -48.8486726
+- slug: "jozi-jug-johannesburg"
+  name: "Jozi JUG (Johannesburg)"
+  country: "South Africa"
+  homepage_url: "https://www.meetup.com/Jozi-JUG/"
+  latitude: -28.8166236
+  longitude: 24.991639
+- slug: "jug-ahmedabad"
+  name: "JUG Ahmedabad"
+  city: "Ahmedabad"
+  country: "India"
+  homepage_url: "https://twitter.com/jugahmedabad"
+  latitude: 23.0215374
+  longitude: 72.5800568
+  active: false
+- slug: "jug-bonn"
+  name: "JUG Bonn"
+  city: "Bonn"
+  country: "Germany"
+  homepage_url: "https://www.meetup.com/JUG-Bonn/"
+  latitude: 50.7352621
+  longitude: 7.1024635
+- slug: "jug-costa-rica"
+  name: "JUG Costa Rica"
+  city: "San Jose"
+  country: "Costa Rica"
+  homepage_url: "https://puravidajug.org/"
+  latitude: 9.9327707
+  longitude: -84.0796144
+- slug: "jug-hyderabad"
+  name: "JUG Hyderabad"
+  city: "Hyderabad"
+  country: "India"
+  homepage_url: "http://www.meetup.com/jughyderabad/"
+  latitude: 17.360589
+  longitude: 78.4740613
+- slug: "jug-istanbul"
+  name: "JUG Istanbul"
+  city: "Istanbul"
+  country: "Turkey"
+  homepage_url: "https://www.jugistanbul.org/"
+  latitude: 41.006381
+  longitude: 28.9758715
+- slug: "jug-karaganda"
+  name: "JUG Karaganda"
+  city: "Karaganda"
+  country: "Kazakhstan"
+  latitude: 49.8421549
+  longitude: 73.1063206
+  active: false
+- slug: "jug-mnster"
+  name: "JUG Münster"
+  city: "Münster"
+  country: "Germany"
+  homepage_url: "https://www.jug-muenster.de/"
+  latitude: 51.9625101
+  longitude: 7.6251879
+- slug: "jug-noord"
+  name: "JUG Noord"
+  city: "Groningen"
+  country: "Netherlands"
+  homepage_url: "https://www.meetup.com/jug-noord/"
+  latitude: 53.2190652
+  longitude: 6.5680077
+- slug: "jug-port-harcourt"
+  name: "JUG Port Harcourt"
+  city: "Port Harcourt"
+  country: "Nigeria"
+  homepage_url: "https://www.facebook.com/Java-User-Group-Port-Harcourt-1436358619990281/"
+  latitude: 4.7676576
+  longitude: 7.0188527
+  active: false
+- slug: "jvm-community-nigeria"
+  name: "JVM Community Nigeria"
+  country: "Nigeria"
+  homepage_url: "https://twitter.com/jvmnigeria?lang=en"
+  latitude: 9.6000359
+  longitude: 7.9999721
+  active: false
+- slug: "jvm-user-group-malaysia"
+  name: "JVM User Group Malaysia"
+  city: "Kuala Lumpur"
+  country: "Malaysia"
+  homepage_url: "https://www.facebook.com/groups/jug.my"
+  latitude: 3.1516964
+  longitude: 101.6942371
+- slug: "kanpur-java-user-group"
+  name: "Kanpur Java User Group"
+  city: "Kanpur"
+  country: "India"
+  latitude: 26.4609135
+  longitude: 80.3217588
+  active: false
+- slug: "kansai-java-user-group"
+  name: "Kansai Java User Group"
+  city: "Osaka"
+  country: "Japan"
+  homepage_url: "https://kanjava.connpass.com/"
+  latitude: 34.6937569
+  longitude: 135.5014539
+- slug: "kansas-city-jug"
+  name: "Kansas City JUG"
+  city: "Kansas City"
+  country: "USA"
+  homepage_url: "https://kcjug.github.io/"
+  latitude: 39.100105
+  longitude: -94.5781416
+- slug: "kenya-java-user-group"
+  name: "Kenya Java User Group"
+  city: "Nairobi"
+  country: "Kenya"
+  homepage_url: "https://x.com/kenyanJug"
+  latitude: -1.3026148
+  longitude: 36.828842
+- slug: "keralajug"
+  name: "KeralaJUG"
+  city: "Perinthalmanna"
+  country: "India"
+  homepage_url: "https://github.com/keralajug"
+  latitude: 10.9756774
+  longitude: 76.2262573
+- slug: "kielce-java-user-group"
+  name: "Kielce Java User Group"
+  city: "Kielce"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/kielce-java-user-group/"
+  latitude: 50.8719903
+  longitude: 20.6310488
+- slug: "knoxville-java-user-group"
+  name: "Knoxville Java User Group"
+  city: "Knoxville"
+  country: "USA"
+  homepage_url: "https://knoxjava.org/"
+  latitude: 35.9603948
+  longitude: -83.9210261
+- slug: "kochi-java-user-group"
+  name: "Kochi Java User Group"
+  city: "Kochi"
+  country: "India"
+  homepage_url: "https://www.meetup.com/kochijug"
+  latitude: 9.9679032
+  longitude: 76.2444378
+- slug: "kutztown-university-java-user-group"
+  name: "Kutztown University Java User Group"
+  city: "Kutztown"
+  country: "USA"
+  homepage_url: "https://www.kutztown.edu/"
+  latitude: 40.5173165
+  longitude: -75.7774177
+- slug: "lava-java-user-group"
+  name: "Lava Java User Group"
+  city: "Clermont Ferrand"
+  country: "France"
+  homepage_url: "https://www.lavajug.org/"
+  latitude: 45.7774551
+  longitude: 3.0819427
+- slug: "le-mans-jug"
+  name: "Le Mans JUG"
+  country: "France"
+  homepage_url: "https://lemansjug.wordpress.com/"
+  latitude: 46.603354
+  longitude: 1.8883335
+- slug: "lightweight-jug-mnchen"
+  name: "Lightweight JUG München"
+  city: "Munich"
+  country: "Germany"
+  homepage_url: "https://www.meetup.com/de-DE/lightweight-java-user-group-munchen/"
+  latitude: 48.1371079
+  longitude: 11.5753822
+- slug: "lisbon-jug"
+  name: "Lisbon JUG"
+  city: "Lisbon"
+  country: "Portugal"
+  homepage_url: "https://www.meetup.com/Lisbon-JUG/"
+  latitude: 38.7077507
+  longitude: -9.1365919
+- slug: "london-java-community"
+  name: "London Java Community"
+  city: "London"
+  country: "UK"
+  homepage_url: "https://www.londonjavacommunity.co.uk/"
+  latitude: 51.5074456
+  longitude: -0.1277653
+- slug: "london-java-community-for-the-docklands"
+  name: "London Java Community for the Docklands"
+  city: "Canary Wharf, London"
+  country: "England"
+  homepage_url: "https://www.docklandsljc.co.uk/"
+  latitude: 51.5048954
+  longitude: -0.0190006
+- slug: "los-angeles-java-user-group"
+  name: "Los Angeles Java User Group"
+  city: "Los Angeles"
+  country: "USA"
+  homepage_url: "http://www.lajug.org/"
+  latitude: 34.0536909
+  longitude: -118.242766
+- slug: "luanda-jug"
+  name: "Luanda JUG"
+  city: "Luanda"
+  country: "Angola"
+  homepage_url: "https://kambas-do-java.github.io/website/"
+  latitude: -8.8272699
+  longitude: 13.2439512
+- slug: "lublin-java-user-group"
+  name: "Lublin Java User Group"
+  city: "Lublin"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/Lublin-Java-User-Group/"
+  latitude: 51.250559
+  longitude: 22.5701022
+- slug: "luxembourg-java-user-group"
+  name: "Luxembourg Java User Group"
+  city: "Luxembourg"
+  country: "Luxembourg"
+  homepage_url: "http://yajug.lu/"
+  latitude: 49.6112768
+  longitude: 6.129799
+- slug: "lyon-java-user-group"
+  name: "Lyon Java User Group"
+  city: "Lyon"
+  country: "France"
+  homepage_url: "https://lyonjug.org/"
+  latitude: 45.7578137
+  longitude: 4.8320114
+- slug: "madras-java-user-group"
+  name: "Madras Java User Group"
+  city: "Chennai"
+  country: "India"
+  homepage_url: "http://www.meetup.com/MadrasJUG/"
+  latitude: 13.0836939
+  longitude: 80.270186
+- slug: "madrid-java-user-group"
+  name: "Madrid Java User Group"
+  city: "Madrid"
+  country: "Spain"
+  homepage_url: "https://madridjug.es/"
+  latitude: 40.416782
+  longitude: -3.703507
+- slug: "malaga-java-user-group"
+  name: "Malaga Java User Group"
+  city: "Malaga"
+  country: "Spain"
+  homepage_url: "https://www.meetup.com/MalagaJUG/"
+  latitude: 36.7213028
+  longitude: -4.4216366
+- slug: "manchester-java-community"
+  name: "Manchester Java Community"
+  city: "Manchester"
+  country: "UK"
+  homepage_url: "https://manchesterjavacommunity.org"
+  latitude: 53.4794892
+  longitude: -2.2451148
+- slug: "maritime-java-user-group-of-canada"
+  name: "Maritime Java User Group of Canada"
+  country: "Canada"
+  latitude: 61.0666922
+  longitude: -107.991707
+  active: false
+- slug: "mars-java-user-group"
+  name: "Mars Java User Group"
+  city: "Marseille"
+  country: "France"
+  homepage_url: "http://marsjug.org/"
+  latitude: 43.2961743
+  longitude: 5.3699525
+- slug: "mdejug"
+  name: "MDEJUG"
+  city: "Medellin"
+  country: "Colombia"
+  homepage_url: "https://mdejug.wordpress.com/"
+  latitude: 6.2697325
+  longitude: -75.6025597
+- slug: "melbourne-java-jvm-users-group"
+  name: "Melbourne Java & JVM Users Group"
+  city: "Melbourne"
+  country: "Australia"
+  homepage_url: "https://www.meetup.com/Melbourne-Java-JVM-Users-Group/"
+  latitude: -37.8142454
+  longitude: 144.9631732
+- slug: "memphis-java-user-group"
+  name: "Memphis Java User Group"
+  city: "Memphis"
+  country: "USA"
+  latitude: 35.1460249
+  longitude: -90.0517638
+  active: false
+- slug: "mexicojava-university-java-user-group"
+  name: "Mexico/Java University Java User Group"
+  country: "Mexico"
+  latitude: 23.6585116
+  longitude: -102.0077097
+  active: false
+- slug: "miami-jvm-group"
+  name: "Miami JVM Group"
+  city: "Miami"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/miami-java-user-group/"
+  latitude: 25.7741566
+  longitude: -80.1935973
+- slug: "montpellier-java-user-group"
+  name: "Montpellier Java User Group"
+  city: "Montpellier"
+  country: "France"
+  homepage_url: "https://x.com/montpellierjug"
+  latitude: 43.6112422
+  longitude: 3.8767337
+- slug: "montral-java-user-group"
+  name: "Montréal Java User Group"
+  city: "Montreal"
+  country: "Canada"
+  homepage_url: "https://www.montreal-jug.org/"
+  latitude: 45.5031824
+  longitude: -73.5698065
+- slug: "morocco-java-user-group"
+  name: "Morocco Java User Group"
+  country: "Morocco"
+  homepage_url: "https://www.facebook.com/groups/moroccojug/?ref=pages_profile_groups_tab&source_id=190176527778680"
+  latitude: 28.3347722
+  longitude: -10.3713379
+- slug: "moscow-java-user-group"
+  name: "Moscow Java User Group"
+  city: "Moscow"
+  country: "Russia"
+  homepage_url: "https://jugmsk.timepad.ru/events/"
+  latitude: 55.7505412
+  longitude: 37.6174782
+- slug: "mumbai-java-user-group"
+  name: "Mumbai Java User Group"
+  city: "Mumbai"
+  country: "India"
+  latitude: 19.054999
+  longitude: 72.8692035
+  active: false
+- slug: "munich-java-user-group"
+  name: "Munich Java User Group"
+  city: "Munich"
+  country: "Germany"
+  homepage_url: "https://jugm.de/"
+  latitude: 48.1371079
+  longitude: 11.5753822
+- slug: "naija-jug"
+  name: "Naija JUG"
+  city: "Lagos"
+  country: "Nigeria"
+  homepage_url: "https://x.com/NaijaJug"
+  latitude: 6.4550575
+  longitude: 3.3941795
+- slug: "nanjing-java-user-group"
+  name: "Nanjing Java User Group"
+  city: "Nanjing"
+  country: "China"
+  latitude: 32.0438284
+  longitude: 118.7788631
+  active: false
+- slug: "nantes-java-user-group"
+  name: "Nantes Java User Group"
+  city: "Nantes"
+  country: "France"
+  homepage_url: "https://nantesjug.org/"
+  latitude: 47.2186371
+  longitude: -1.5541362
+- slug: "nashville-java-user-group"
+  name: "Nashville Java User Group"
+  city: "Nashville"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/nashvillejug/"
+  latitude: 36.1622767
+  longitude: -86.7742984
+- slug: "netherlands-java-user-group"
+  name: "Netherlands Java User Group"
+  city: "Haarlem"
+  country: "Netherlands"
+  homepage_url: "http://www.nljug.org/"
+  latitude: 52.3885317
+  longitude: 4.6388048
+- slug: "new-york-java-meetup-user-group"
+  name: "New York Java Meetup User Group"
+  city: "New York"
+  country: "USA"
+  homepage_url: "http://www.meetup.com/nycjava/"
+  latitude: 40.7127281
+  longitude: -74.0060152
+- slug: "new-york-java-special-interest-group"
+  name: "New York Java Special Interest Group"
+  city: "New York"
+  country: "USA"
+  homepage_url: "http://www.javasig.com/"
+  latitude: 40.7127281
+  longitude: -74.0060152
+- slug: "nicaragua-java-user-group"
+  name: "Nicaragua Java User Group"
+  city: "Managua"
+  country: "Nicaragua"
+  homepage_url: "https://jugnicaragua.org/"
+  latitude: 12.1547116
+  longitude: -86.273725
+- slug: "nijmegen-java-user-group"
+  name: "Nijmegen Java User Group"
+  city: "Nijmegen"
+  country: "Netherlands"
+  homepage_url: "https://www.meetup.com/nijmegen-java-user-group/"
+  latitude: 51.8474946
+  longitude: 5.8637771
+- slug: "normandy-java-user-group"
+  name: "Normandy Java User Group"
+  city: "Rouen"
+  country: "France"
+  homepage_url: "https://twitter.com/normandyjug?lang=en"
+  latitude: 49.4404591
+  longitude: 1.0939658
+- slug: "o-distrito-federal-java-user-group"
+  name: "O Distrito Federal Java User Group"
+  country: "Brazil"
+  latitude: -10.3333333
+  longitude: -53.2
+  active: false
+- slug: "ogbomoso-java-user-group"
+  name: "Ogbomoso Java User Group"
+  country: "Nigeria"
+  homepage_url: "https://twitter.com/JavaOgbomoso"
+  latitude: 9.6000359
+  longitude: 7.9999721
+  active: false
+- slug: "okayama-jug"
+  name: "Okayama JUG"
+  city: "Okayama"
+  country: "Japan"
+  homepage_url: "https://okajug.doorkeeper.jp/"
+  latitude: 34.6553944
+  longitude: 133.9194595
+- slug: "oklahoma-city-java-user-group"
+  name: "Oklahoma City Java User Group"
+  city: "Oklahoma City"
+  country: "Oklahoma"
+  homepage_url: "https://okcjug.org"
+  latitude: 35.4729886
+  longitude: -97.5170536
+- slug: "omaha-java-user-group"
+  name: "Omaha Java User Group"
+  city: "Omaha"
+  country: "USA"
+  homepage_url: "http://ojug.org/"
+  latitude: 41.2587459
+  longitude: -95.9383758
+- slug: "orange-county-java-user-group"
+  name: "Orange County Java User Group"
+  city: "Irvine"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/orange-county-java-users-group-ocjug/"
+  latitude: 33.6856969
+  longitude: -117.825981
+- slug: "orlando-java-user-group"
+  name: "Orlando Java User Group"
+  city: "Orlando"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/orlando-jug-java-user-group/"
+  latitude: 28.5421218
+  longitude: -81.379045
+- slug: "orlans-java-user-group"
+  name: "Orl√©ans Java User Group"
+  city: "Orl√©ans"
+  country: "France"
+  homepage_url: "http://www.jugorleans.fr/"
+- slug: "ottawa-jug"
+  name: "Ottawa JUG"
+  city: "Ottawa"
+  country: "Canada"
+  homepage_url: "https://www.meetup.com/ottawa-java-user-group/"
+  latitude: 45.4208777
+  longitude: -75.6901106
+- slug: "pakistan-java-user-group"
+  name: "Pakistan Java User Group"
+  city: "Lahore"
+  country: "Pakistan"
+  homepage_url: "https://www.facebook.com/jugpk/"
+  latitude: 31.5656822
+  longitude: 74.3141829
+- slug: "panama-jug"
+  name: "Panama JUG"
+  city: "Panama City"
+  country: "Panama"
+  homepage_url: "https://panamajug.org/"
+  latitude: 8.9714493
+  longitude: -79.5341802
+- slug: "paris-java-user-group"
+  name: "Paris Java User Group"
+  city: "Paris"
+  country: "France"
+  homepage_url: "https://www.parisjug.org/"
+  latitude: 48.8534951
+  longitude: 2.3483915
+- slug: "perth-java-jvm-community"
+  name: "Perth Java & JVM Community"
+  city: "Perth"
+  country: "Australia"
+  homepage_url: "https://www.meetup.com/Perth-Java-JVM-Community/"
+  latitude: -31.9558967
+  longitude: 115.8605784
+- slug: "perulima-java-user-group"
+  name: "Peru/Lima Java User Group"
+  city: "Lima"
+  country: "Peru"
+  homepage_url: "https://www.meetup.com/Peru-Java-User-Group/"
+  latitude: -12.0459808
+  longitude: -77.0305912
+- slug: "philadelphia-java-users-group"
+  name: "Philadelphia Java Users Group"
+  city: "Philadelphia"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/PhillyJUG/"
+  latitude: 39.9527237
+  longitude: -75.1635262
+- slug: "phoenix-java-user-group"
+  name: "Phoenix Java User Group"
+  city: "Phoenix"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/phxjug/"
+  latitude: 33.4484367
+  longitude: -112.074141
+- slug: "pisa-java-user-group"
+  name: "Pisa Java User Group"
+  city: "Pisa"
+  country: "Italy"
+  homepage_url: "https://jugpisa.github.io/"
+  latitude: 43.7159395
+  longitude: 10.4018624
+- slug: "pittsburgh-java-user-group"
+  name: "Pittsburgh Java User Group"
+  city: "Pittsburgh"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/The-Pittsburgh-Java-Meetup-Group/"
+  latitude: 40.4406968
+  longitude: -80.0025666
+- slug: "poitou-charentes-java-user-group"
+  name: "Poitou Charentes Java User Group"
+  city: "Niort"
+  country: "France"
+  homepage_url: "http://www.poitoucharentesjug.org/"
+  latitude: 46.3239233
+  longitude: -0.4646064
+- slug: "polish-java-user-group"
+  name: "Polish Java User Group"
+  country: "Poland"
+  homepage_url: "http://www.java.pl"
+  latitude: 52.215933
+  longitude: 19.134422
+- slug: "portland-java-user-group"
+  name: "Portland Java User Group"
+  city: "Portland"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/PDXJUG/"
+  latitude: 45.5202471
+  longitude: -122.674194
+- slug: "portugal-java-user-group"
+  name: "Portugal Java User Group"
+  country: "Portugal"
+  homepage_url: "http://jug.pt/"
+  latitude: 39.6621648
+  longitude: -8.1353519
+- slug: "pozna-java-user-group"
+  name: "Poznań Java User Group"
+  city: "Poznan"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/poznan-java-user-group/"
+  latitude: 52.4082663
+  longitude: 16.9335199
+- slug: "prayagraj-java-user-group"
+  name: "Prayagraj Java User Group"
+  city: "Prayagraj"
+  country: "India"
+  homepage_url: "https://www.instagram.com/jug_prayagraj"
+  latitude: 25.4381302
+  longitude: 81.8338005
+- slug: "pune-java-user-group"
+  name: "Pune Java User Group"
+  city: "Pune"
+  country: "India"
+  homepage_url: "http://www.meetup.com/punejug/"
+  latitude: 18.5213738
+  longitude: 73.8545071
+- slug: "queensland-jvm-group"
+  name: "Queensland JVM Group"
+  city: "Labador"
+  country: "Australia"
+  latitude: 10.417565
+  longitude: 125.0077896
+  active: false
+- slug: "rdc-jug"
+  name: "RDC JUG"
+  country: "Congo, The Democratic Republic of"
+  latitude: -2.9814344
+  longitude: 23.8222636
+  active: false
+- slug: "richmond-java-user-group"
+  name: "Richmond Java User Group"
+  city: "Richmond"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/Richmond-Java-Users-Group/"
+  latitude: 37.5385087
+  longitude: -77.43428
+- slug: "rio-de-janeiro-java-user-group"
+  name: "Rio de Janeiro Java User Group"
+  city: "Rio De Janeiro"
+  country: "Brazil"
+  homepage_url: "http://www.riojug.org/"
+  latitude: -22.9110137
+  longitude: -43.2093727
+- slug: "riviera-java-user-group"
+  name: "Riviera Java User Group"
+  city: "Nice"
+  country: "France"
+  homepage_url: "http://www.rivierajug.org/"
+  latitude: 43.7009358
+  longitude: 7.2683912
+- slug: "riyadh-java-user-group"
+  name: "Riyadh Java User Group"
+  city: "Riyadh"
+  country: "Saudi Arabia"
+  homepage_url: "https://www.meetup.com/riyadh-java-users-group/"
+  latitude: 24.638916
+  longitude: 46.7160104
+- slug: "rotterdam-jug"
+  name: "Rotterdam JUG"
+  city: "Rotterdam"
+  country: "Netherlands"
+  homepage_url: "https://rotterdamjug.nl/"
+  latitude: 51.9244424
+  longitude: 4.47775
+- slug: "ruhrgebiet-java-user-group"
+  name: "Ruhrgebiet Java User Group"
+  city: "Essen"
+  country: "Germany"
+  homepage_url: "https://ruhrjug.de/"
+  latitude: 51.4582235
+  longitude: 7.0158171
+- slug: "rzeszw-java-user-group"
+  name: "Rzeszów Java User Group"
+  city: "Rzeszów"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/rzeszow-java-user-group/"
+  latitude: 50.0374531
+  longitude: 22.0047174
+- slug: "san-diego-java-user-group"
+  name: "San Diego Java User Group"
+  city: "San Diego"
+  country: "USA"
+  homepage_url: "http://www.sdjug.org/"
+  latitude: 32.7174202
+  longitude: -117.162772
+- slug: "san-francisco-java-user-group"
+  name: "San Francisco Java User Group"
+  city: "San Francisco"
+  country: "USA"
+  homepage_url: "http://www.meetup.com/sfjava/"
+  latitude: 37.7879363
+  longitude: -122.4075201
+- slug: "san-gabriel-valley-java-user-group"
+  name: "San Gabriel Valley Java User Group"
+  city: "Los Angeles"
+  country: "USA"
+  latitude: 34.0536909
+  longitude: -118.242766
+  active: false
+- slug: "seattle-java-user-group"
+  name: "Seattle Java User Group"
+  city: "Seattle"
+  country: "USA"
+  homepage_url: "https://www.seajug.org/"
+  latitude: 47.6038321
+  longitude: -122.330062
+- slug: "senejug"
+  name: "SeneJUG"
+  country: "Senegal"
+  latitude: 14.4750607
+  longitude: -14.4529612
+- slug: "shanghai-java-user-group"
+  name: "Shanghai Java User Group"
+  city: "Shanghai"
+  country: "China"
+  latitude: 31.2323437
+  longitude: 121.4691024
+  active: false
+- slug: "shenzhen-java-user-group"
+  name: "Shenzhen Java User Group"
+  city: "Shenzhen"
+  country: "China"
+  homepage_url: "http://szjug.github.io/"
+  latitude: 22.5445741
+  longitude: 114.0545429
+- slug: "silesia-java-user-group"
+  name: "Silesia Java User Group"
+  city: "Katowice"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/silesia-jug/"
+  latitude: 50.2598987
+  longitude: 19.0215852
+- slug: "silicon-valley-java-user-group"
+  name: "Silicon Valley Java User Group"
+  city: "Mountain View"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/sv-jug/"
+  latitude: 37.3893889
+  longitude: -122.0832101
+- slug: "silicon-valley-javafx-java-user-group"
+  name: "Silicon Valley JavaFX Java User Group"
+  city: "San Jose"
+  country: "USA"
+  homepage_url: "http://www.meetup.com/svjugfx/?https=off"
+  latitude: 37.3361663
+  longitude: -121.890591
+- slug: "singapore-java-user-group"
+  name: "Singapore Java User Group"
+  city: "Singapore"
+  country: "Singapore"
+  homepage_url: "https://www.meetup.com/singajug/"
+  latitude: 1.2899175
+  longitude: 103.8519072
+- slug: "skg-java-meetup"
+  name: "SKG Java Meetup"
+  city: "Thessaloniki"
+  country: "Greece"
+  homepage_url: "https://www.meetup.com/thessaloniki-not-only-java/"
+  latitude: 40.6403167
+  longitude: 22.9352716
+- slug: "sociedade-de-usuarios-java"
+  name: "Sociedade de Usuarios Java"
+  country: "Brazil"
+  homepage_url: "http://soujava.org.br"
+  latitude: -10.3333333
+  longitude: -53.2
+- slug: "soujava"
+  name: "SouJAVA"
+  country: "Brazil"
+  homepage_url: "https://soujava.org.br"
+  latitude: -10.3333333
+  longitude: -53.2
+- slug: "soujava-campinas-java-user-group"
+  name: "SouJava Campinas Java User Group"
+  city: "Campinas"
+  country: "Brazil"
+  homepage_url: "http://soujava.org.br/regionais/campinas/"
+  latitude: -22.9056391
+  longitude: -47.059564
+- slug: "st-louis-java-user-group"
+  name: "St. Louis Java User Group"
+  city: "St. Louis"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/GatewayJUG/"
+  latitude: 38.6254063
+  longitude: -90.190009
+- slug: "stockholm-java-user-group"
+  name: "Stockholm Java User Group"
+  city: "Stockholm"
+  country: "Sweden"
+  homepage_url: "https://www.meetup.com/stockholm-java-user-group/"
+  latitude: 59.3251172
+  longitude: 18.0710935
+- slug: "stuttgart-java-user-group"
+  name: "Stuttgart Java User Group"
+  city: "Stuttgart"
+  country: "Germany"
+  homepage_url: "http://www.jugs.org/"
+  latitude: 48.7784485
+  longitude: 9.1800132
+- slug: "suceava-java-user-group"
+  name: "Suceava Java User Group"
+  city: "Suceava"
+  country: "Romania"
+  homepage_url: "https://www.facebook.com/suceavajug/"
+  latitude: 47.647001
+  longitude: 26.2522599
+- slug: "sudan-java-user-group"
+  name: "Sudan Java User Group"
+  city: "Khartoum"
+  country: "Sudan"
+  homepage_url: "https://sudanjug.github.io/"
+  latitude: 15.5635972
+  longitude: 32.5349123
+- slug: "sunnyvale-java-user-group"
+  name: "Sunnyvale Java User Group"
+  city: "Sunnyvale"
+  country: "USA"
+  homepage_url: "https://sunnyvalejug.org/"
+  latitude: 37.3688301
+  longitude: -122.036349
+- slug: "sydney-java-event"
+  name: "Sydney Java Event"
+  city: "Sydney"
+  country: "Australia"
+  homepage_url: "https://java-oracle.com/"
+  latitude: -33.8698439
+  longitude: 151.2082848
+- slug: "sydney-jvm-community"
+  name: "Sydney JVM Community"
+  city: "Sydney"
+  country: "Australia"
+  homepage_url: "https://www.meetup.com/Sydney-JVM-Community/"
+  latitude: -33.8698439
+  longitude: 151.2082848
+- slug: "szczecin-jug"
+  name: "Szczecin JUG"
+  city: "Szczecin"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/szczecin-java-user-group-szczecin-jug/"
+  latitude: 53.4301818
+  longitude: 14.5509623
+- slug: "taiwan-java-user-group"
+  name: "Taiwan Java User Group"
+  city: "Taipei"
+  country: "Taiwan, China"
+  homepage_url: "http://www.twjug.org/"
+  latitude: 25.0375198
+  longitude: 121.5636796
+- slug: "tamil-nadu-java-user-group"
+  name: "Tamil Nadu Java User Group"
+  city: "Coimbatore"
+  country: "India"
+  homepage_url: "https://www.linkedin.com/company/tamil-jug/"
+  latitude: 11.0018115
+  longitude: 76.9628425
+- slug: "tampa-java-user-group"
+  name: "Tampa Java User Group"
+  city: "Tampa Bay"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/tampa-jug/"
+  latitude: 27.6886419
+  longitude: -82.5723193
+- slug: "td-java-user-group"
+  name: "TD Java User Group"
+  city: "Dubai"
+  country: "UAE"
+  homepage_url: "https://www.linkedin.com/groups/9530081/"
+  latitude: 25.2296341
+  longitude: 55.289585
+- slug: "the-cleveland-java-meetup-group"
+  name: "The Cleveland Java Meetup Group"
+  city: "Cleveland"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/cleveland-java/"
+  latitude: 41.4996574
+  longitude: -81.6936772
+- slug: "toronto-java-user-group"
+  name: "Toronto Java User Group"
+  city: "Toronto"
+  country: "Canada"
+  homepage_url: "http://www.tjug.ca/"
+  latitude: 43.6534817
+  longitude: -79.3839347
+- slug: "toru-java-user-group"
+  name: "Toruń Java User Group"
+  city: "Torun"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/torun-jug/"
+  latitude: 53.0102721
+  longitude: 18.6048094
+- slug: "toulouse-java-user-group"
+  name: "Toulouse Java User Group"
+  city: "Toulouse"
+  country: "France"
+  homepage_url: "https://www.toulousejug.org/"
+  latitude: 43.6044638
+  longitude: 1.4442433
+- slug: "transylvania-java-user-group"
+  name: "Transylvania Java User Group"
+  city: "Transylvania"
+  country: "Romania"
+  latitude: 46.5971623
+  longitude: 24.3740295
+  active: false
+- slug: "triangle-java-user-group"
+  name: "Triangle Java User Group"
+  city: "Cary"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/Triangle-Java-Users-Group/"
+  latitude: 35.7882893
+  longitude: -78.7812081
+- slug: "trjmiasto-java-user-group"
+  name: "Trójmiasto Java User Group"
+  city: "Gdansk"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/trojmiasto-java-user-group/"
+  latitude: 54.3482907
+  longitude: 18.6540233
+- slug: "tulsa-java-user-group"
+  name: "Tulsa Java User Group"
+  country: "USA"
+  latitude: 39.7837304
+  longitude: -100.445882
+- slug: "tunisia-java-user-group"
+  name: "Tunisia Java User Group"
+  city: "Tunis"
+  country: "Tunisia"
+  homepage_url: "https://www.linkedin.com/company/jug-tunisia/posts/"
+  latitude: 36.8002068
+  longitude: 10.1857757
+  active: false
+- slug: "turkey-java-community"
+  name: "Turkey Java Community"
+  city: "Ankara"
+  country: "Turkey"
+  homepage_url: "https://turkeyjava.com"
+  latitude: 39.9207759
+  longitude: 32.8540497
+- slug: "twin-cities-java-user-group"
+  name: "Twin Cities Java User Group"
+  country: "USA"
+  homepage_url: "https://www.meetup.com/tcjug-intertech/"
+  latitude: 39.7837304
+  longitude: -100.445882
+- slug: "ukraine-java-user-group"
+  name: "Ukraine Java User Group"
+  country: "Ukraine"
+  homepage_url: "https://www.meetup.com/JUG_UA/"
+  latitude: 49.4871968
+  longitude: 31.2718321
+- slug: "ume-java-user-group"
+  name: "Umeå Java User Group"
+  city: "Umeå"
+  country: "Sweden"
+  homepage_url: "https://www.meetup.com/UmeJUG/"
+  latitude: 63.8256568
+  longitude: 20.2630745
+- slug: "university-of-philippines-java-user-group"
+  name: "University of Philippines Java User Group"
+  country: "Philippines"
+  latitude: 12.7503486
+  longitude: 122.7312101
+  active: false
+- slug: "uruguay-java-user-group"
+  name: "Uruguay Java User Group"
+  country: "Uruguay"
+  latitude: -32.8755548
+  longitude: -56.0201525
+- slug: "utah-java-users-group"
+  name: "Utah Java Users Group"
+  country: "USA"
+  homepage_url: "http://ujug.org/"
+  latitude: 39.7837304
+  longitude: -100.445882
+- slug: "utrecht-java-user-group"
+  name: "Utrecht Java User Group"
+  city: "Utrecht"
+  country: "Netherlands"
+  homepage_url: "https://www.meetup.com/Utrecht-Java-User-Group/?_cookie-check=VI5iLN3djNwvfHWz"
+  latitude: 52.0907006
+  longitude: 5.1215634
+- slug: "valencia-java-user-group"
+  name: "Valencia Java User Group"
+  city: "Valencia"
+  country: "Spain"
+  homepage_url: "https://www.meetup.com/ValenciaJUG"
+  latitude: 39.4697065
+  longitude: -0.3763353
+- slug: "vancouver-island-java-user-group"
+  name: "Vancouver Island Java User Group"
+  city: "Vancouver Island"
+  country: "Canada"
+  latitude: 49.5929495
+  longitude: -125.702557
+  active: false
+- slug: "vancouver-java-user-group"
+  name: "Vancouver Java User Group"
+  city: "Vancouver"
+  country: "Canada"
+  homepage_url: "https://www.linkedin.com/groups/14603101/"
+  latitude: 49.2608724
+  longitude: -123.113952
+- slug: "venezuela-java-user-group"
+  name: "Venezuela Java User Group"
+  country: "Venezuela"
+  latitude: 8.0018709
+  longitude: -66.1109318
+- slug: "vigo-java-user-group"
+  name: "Vigo Java User Group"
+  city: "Vigo"
+  country: "Spain"
+  homepage_url: "https://x.com/VigoJUG"
+  latitude: 42.2376602
+  longitude: -8.7247205
+- slug: "virtual-java-user-group"
+  name: "Virtual Java User Group"
+  city: "London"
+  country: "UK"
+  homepage_url: "https://www.meetup.com/virtualjug/"
+  latitude: 51.5074456
+  longitude: -0.1277653
+- slug: "walloon-java-user-group"
+  name: "Walloon Java User Group"
+  city: "Liège"
+  country: "Belgium"
+  homepage_url: "https://www.meetup.com/wajug-be/"
+  latitude: 50.6450944
+  longitude: 5.5736112
+- slug: "warsaw-java-user-group"
+  name: "Warsaw Java User Group"
+  city: "Warsaw"
+  country: "Poland"
+  homepage_url: "http://warszawa.jug.pl/#/about"
+  latitude: 52.2319581
+  longitude: 21.0067249
+- slug: "wellington-java-user-group"
+  name: "Wellington Java User Group"
+  city: "Wellington"
+  country: "New Zealand"
+  homepage_url: "https://www.meetup.com/wellington-java-user-group/"
+  latitude: -41.2887953
+  longitude: 174.7772114
+- slug: "west-midlands-java-user-group"
+  name: "West Midlands Java User Group"
+  city: "Birmingham"
+  country: "England"
+  homepage_url: "https://wm-jug.org/"
+  latitude: 52.4796992
+  longitude: -1.9026911
+- slug: "wisconsin-java-user-group"
+  name: "Wisconsin Java User Group"
+  country: "USA"
+  latitude: 39.7837304
+  longitude: -100.445882
+  active: false
+- slug: "wroclaw-java-user-group"
+  name: "Wroclaw Java User Group"
+  city: "Wroclaw"
+  country: "Poland"
+  homepage_url: "http://www.meetup.com/WroclawJUG/"
+  latitude: 51.1089776
+  longitude: 17.0326689
+- slug: "yerevan-java-user-group"
+  name: "Yerevan Java User Group"
+  city: "Yerevan"
+  country: "Armenia"
+  homepage_url: "https://www.facebook.com/evnjug/"
+  latitude: 40.1777112
+  longitude: 44.5126233
+- slug: "zielona-gra-java-user-group"
+  name: "Zielona Góra Java User Group"
+  city: "Zielona Góra"
+  country: "Poland"
+  homepage_url: "https://www.meetup.com/zielona-gora-jug/"
+  latitude: 51.9383777
+  longitude: 15.5050408
