@@ -66,9 +66,30 @@ public class HomeController {
                 ))
                 .collect(Collectors.toList());
 
+        List<JavaUserGroup> recentJugs = jugRepository.findTop3ByDeletedAtIsNullOrderByCreatedAtDesc();
+        List<Map<String, Object>> recentJugData = recentJugs.stream()
+                .map(jug -> Map.<String, Object>of(
+                        "slug", jug.getSlug(),
+                        "name", jug.getName(),
+                        "city", jug.getCity() != null ? jug.getCity() : "",
+                        "country", jug.getCountry() != null ? jug.getCountry() : "",
+                        "createdAt", jug.getCreatedAt().toString()
+                ))
+                .toList();
+
+        List<Map<String, Object>> allSpeakerData = appUserRepository.findAll().stream()
+                .map(speaker -> Map.<String, Object>of(
+                        "username", speaker.getUsername(),
+                        "displayName", speaker.getDisplayName() != null ? speaker.getDisplayName() : speaker.getUsername(),
+                        "avatarUrl", speaker.getAvatarUrl() != null ? speaker.getAvatarUrl() : ""
+                ))
+                .toList();
+
         model.addAttribute("jugs", activeJugs);
         model.addAttribute("jugsJson", jsonMapper.writeValueAsString(jugData));
         model.addAttribute("topSpeakers", topSpeakerData);
+        model.addAttribute("recentJugs", recentJugData);
+        model.addAttribute("speakersJson", jsonMapper.writeValueAsString(allSpeakerData));
         model.addAttribute("jugCount", activeJugs.size());
         model.addAttribute("speakerCount", appUserRepository.count());
         return "index";

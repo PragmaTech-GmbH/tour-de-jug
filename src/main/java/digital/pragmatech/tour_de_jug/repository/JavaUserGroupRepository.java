@@ -15,4 +15,6 @@ public interface JavaUserGroupRepository extends JpaRepository<JavaUserGroup, UU
 
     @Query("SELECT j FROM JavaUserGroup j WHERE j.deletedAt IS NULL AND (LOWER(j.name) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(j.city) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(j.country) LIKE LOWER(CONCAT('%', :query, '%')))")
     List<JavaUserGroup> searchActive(String query);
+
+    List<JavaUserGroup> findTop3ByDeletedAtIsNullOrderByCreatedAtDesc();
 }
